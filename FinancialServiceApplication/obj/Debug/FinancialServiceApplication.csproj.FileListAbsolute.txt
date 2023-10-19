@@ -1,0 +1,10 @@
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\FinancialServiceApplication.exe.config
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\FinancialServiceApplication.exe
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\FinancialServiceApplication.pdb
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.csproj.AssemblyReference.cache
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.Form1.resources
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.Properties.Resources.resources
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.csproj.GenerateResource.cache
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.csproj.CoreCompileInputs.cache
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.exe
+C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.pdb
