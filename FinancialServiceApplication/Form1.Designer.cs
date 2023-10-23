@@ -195,13 +195,14 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hOMEToolStripMenuItem,
             this.aBOUTUSToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1237, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1237, 32);
             this.menuStrip1.TabIndex = 13;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -210,27 +211,30 @@
             this.hOMEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.vENDORSToolStripMenuItem,
             this.aPPLICATIONToolStripMenuItem});
+            this.hOMEToolStripMenuItem.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hOMEToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("hOMEToolStripMenuItem.Image")));
             this.hOMEToolStripMenuItem.Name = "hOMEToolStripMenuItem";
-            this.hOMEToolStripMenuItem.Size = new System.Drawing.Size(86, 24);
+            this.hOMEToolStripMenuItem.Size = new System.Drawing.Size(104, 28);
             this.hOMEToolStripMenuItem.Text = "HOME";
+            this.hOMEToolStripMenuItem.Click += new System.EventHandler(this.hOMEToolStripMenuItem_Click);
             // 
             // aBOUTUSToolStripMenuItem
             // 
+            this.aBOUTUSToolStripMenuItem.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aBOUTUSToolStripMenuItem.Name = "aBOUTUSToolStripMenuItem";
-            this.aBOUTUSToolStripMenuItem.Size = new System.Drawing.Size(93, 24);
+            this.aBOUTUSToolStripMenuItem.Size = new System.Drawing.Size(127, 28);
             this.aBOUTUSToolStripMenuItem.Text = "ABOUT US";
             // 
             // vENDORSToolStripMenuItem
             // 
             this.vENDORSToolStripMenuItem.Name = "vENDORSToolStripMenuItem";
-            this.vENDORSToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.vENDORSToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.vENDORSToolStripMenuItem.Text = "VENDORS";
             // 
             // aPPLICATIONToolStripMenuItem
             // 
             this.aPPLICATIONToolStripMenuItem.Name = "aPPLICATIONToolStripMenuItem";
-            this.aPPLICATIONToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.aPPLICATIONToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.aPPLICATIONToolStripMenuItem.Text = "APPLICATION";
             // 
             // Form1

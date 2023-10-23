@@ -76,5 +76,10 @@ namespace FinancialServiceApplication
         {
 
         }
+
+        private void hOMEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
