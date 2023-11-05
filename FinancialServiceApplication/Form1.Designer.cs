@@ -1,6 +1,8 @@
-﻿namespace FinancialServiceApplication
+﻿using System.Windows.Forms;
+
+namespace FinancialServiceApplication
 {
-    partial class Form1
+    partial class application
     {
         /// <summary>
         /// Required designer variable.
@@ -28,262 +30,614 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.SoftTech = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(application));
+            this.header = new System.Windows.Forms.Panel();
+            this.HeaderSearch = new System.Windows.Forms.Panel();
+            this.searchText = new System.Windows.Forms.TextBox();
+            this.CitiSoft = new System.Windows.Forms.Label();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.menuFunctions = new System.Windows.Forms.MenuStrip();
             this.hOMEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sIGNUPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBOUTUSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vENDORSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aPPLICATIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.lOGINToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.homePage = new System.Windows.Forms.Panel();
+            this.footer = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.softwareButton = new System.Windows.Forms.Button();
+            this.vendorButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.SiteDescriptionText = new System.Windows.Forms.Label();
+            this.aboutUs = new System.Windows.Forms.Panel();
+            this.logInPage = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.CitiSoft3 = new System.Windows.Forms.Label();
+            this.logInForm = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.goBackButton = new System.Windows.Forms.Button();
+            this.logInButton = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.signUpLink = new System.Windows.Forms.LinkLabel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.signUpPage = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.signUpForm = new System.Windows.Forms.Panel();
+            this.addressLabel = new System.Windows.Forms.Label();
+            this.contactLabel = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.genderLabel = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.emailLabel = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.goBackButtonS = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.logInLink = new System.Windows.Forms.LinkLabel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lastnameLabel = new System.Windows.Forms.Label();
+            this.firstnameLabel = new System.Windows.Forms.Label();
+            this.vendorPage = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.softwarePage = new System.Windows.Forms.Panel();
+            this.header.SuspendLayout();
+            this.HeaderSearch.SuspendLayout();
+            this.menuFunctions.SuspendLayout();
+            this.homePage.SuspendLayout();
+            this.footer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.logInPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.logInForm.SuspendLayout();
+            this.signUpPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.signUpForm.SuspendLayout();
+            this.vendorPage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // header
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.menuStrip1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1241, 153);
-            this.panel1.TabIndex = 3;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.header.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            resources.ApplyResources(this.header, "header");
+            this.header.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.header.Controls.Add(this.HeaderSearch);
+            this.header.Controls.Add(this.menuFunctions);
+            this.header.Name = "header";
+            this.header.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // button2
+            // HeaderSearch
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button2.Location = new System.Drawing.Point(1130, 28);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 46);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "LOG IN";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            resources.ApplyResources(this.HeaderSearch, "HeaderSearch");
+            this.HeaderSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.HeaderSearch.Controls.Add(this.searchText);
+            this.HeaderSearch.Controls.Add(this.CitiSoft);
+            this.HeaderSearch.Controls.Add(this.searchButton);
+            this.HeaderSearch.Name = "HeaderSearch";
             // 
-            // panel2
+            // searchText
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.SoftTech);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 80);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1237, 69);
-            this.panel2.TabIndex = 6;
+            resources.ApplyResources(this.searchText, "searchText");
+            this.searchText.BackColor = System.Drawing.SystemColors.Window;
+            this.searchText.ForeColor = System.Drawing.Color.Black;
+            this.searchText.HideSelection = false;
+            this.searchText.Name = "searchText";
+            this.searchText.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox1
+            // CitiSoft
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox1.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.Black;
-            this.textBox1.HideSelection = false;
-            this.textBox1.Location = new System.Drawing.Point(629, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(365, 36);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            resources.ApplyResources(this.CitiSoft, "CitiSoft");
+            this.CitiSoft.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.CitiSoft.ForeColor = System.Drawing.Color.White;
+            this.CitiSoft.Name = "CitiSoft";
             // 
-            // SoftTech
+            // searchButton
             // 
-            this.SoftTech.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.SoftTech.AutoSize = true;
-            this.SoftTech.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.SoftTech.Font = new System.Drawing.Font("Gill Sans Ultra Bold Condensed", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SoftTech.ForeColor = System.Drawing.Color.White;
-            this.SoftTech.Location = new System.Drawing.Point(134, 1);
-            this.SoftTech.Name = "SoftTech";
-            this.SoftTech.Size = new System.Drawing.Size(222, 68);
-            this.SoftTech.TabIndex = 4;
-            this.SoftTech.Text = "SoftTech";
-            this.SoftTech.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            resources.ApplyResources(this.searchButton, "searchButton");
+            this.searchButton.Name = "searchButton";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // button1
+            // menuFunctions
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.Location = new System.Drawing.Point(1000, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 36);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(347, 442);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(454, 38);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "INFORMATION MADE EASY";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Narrow", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(170, 507);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(805, 80);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "- GET FAST RELIABLE DETAILS ON DIFFERENT VENDORS \r\n  AND THEIR APPLICATIONS WITH " +
-    "SoftTech";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button3.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(285, 653);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(260, 127);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "VENDORS";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.button4.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(693, 653);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(260, 127);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "APPLICATIONS";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 898);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1241, 157);
-            this.flowLayoutPanel1.TabIndex = 10;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuFunctions.BackColor = System.Drawing.Color.White;
+            this.menuFunctions.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuFunctions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hOMEToolStripMenuItem,
-            this.aBOUTUSToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1237, 32);
-            this.menuStrip1.TabIndex = 13;
-            this.menuStrip1.Text = "menuStrip1";
+            this.sIGNUPToolStripMenuItem,
+            this.aBOUTUSToolStripMenuItem,
+            this.lOGINToolStripMenuItem});
+            resources.ApplyResources(this.menuFunctions, "menuFunctions");
+            this.menuFunctions.Name = "menuFunctions";
             // 
             // hOMEToolStripMenuItem
             // 
-            this.hOMEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vENDORSToolStripMenuItem,
-            this.aPPLICATIONToolStripMenuItem});
-            this.hOMEToolStripMenuItem.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hOMEToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("hOMEToolStripMenuItem.Image")));
+            resources.ApplyResources(this.hOMEToolStripMenuItem, "hOMEToolStripMenuItem");
             this.hOMEToolStripMenuItem.Name = "hOMEToolStripMenuItem";
-            this.hOMEToolStripMenuItem.Size = new System.Drawing.Size(104, 28);
-            this.hOMEToolStripMenuItem.Text = "HOME";
             this.hOMEToolStripMenuItem.Click += new System.EventHandler(this.hOMEToolStripMenuItem_Click);
+            // 
+            // sIGNUPToolStripMenuItem
+            // 
+            this.sIGNUPToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.sIGNUPToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            resources.ApplyResources(this.sIGNUPToolStripMenuItem, "sIGNUPToolStripMenuItem");
+            this.sIGNUPToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.sIGNUPToolStripMenuItem.Name = "sIGNUPToolStripMenuItem";
+            this.sIGNUPToolStripMenuItem.Click += new System.EventHandler(this.sIGNUPToolStripMenuItem_Click);
             // 
             // aBOUTUSToolStripMenuItem
             // 
-            this.aBOUTUSToolStripMenuItem.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aBOUTUSToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.aBOUTUSToolStripMenuItem, "aBOUTUSToolStripMenuItem");
             this.aBOUTUSToolStripMenuItem.Name = "aBOUTUSToolStripMenuItem";
-            this.aBOUTUSToolStripMenuItem.Size = new System.Drawing.Size(127, 28);
-            this.aBOUTUSToolStripMenuItem.Text = "ABOUT US";
+            this.aBOUTUSToolStripMenuItem.Click += new System.EventHandler(this.aBOUTUSToolStripMenuItem_Click);
             // 
-            // vENDORSToolStripMenuItem
+            // lOGINToolStripMenuItem
             // 
-            this.vENDORSToolStripMenuItem.Name = "vENDORSToolStripMenuItem";
-            this.vENDORSToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
-            this.vENDORSToolStripMenuItem.Text = "VENDORS";
+            this.lOGINToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lOGINToolStripMenuItem.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.lOGINToolStripMenuItem, "lOGINToolStripMenuItem");
+            this.lOGINToolStripMenuItem.Name = "lOGINToolStripMenuItem";
+            this.lOGINToolStripMenuItem.Click += new System.EventHandler(this.lOGINToolStripMenuItem_Click);
             // 
-            // aPPLICATIONToolStripMenuItem
+            // homePage
             // 
-            this.aPPLICATIONToolStripMenuItem.Name = "aPPLICATIONToolStripMenuItem";
-            this.aPPLICATIONToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
-            this.aPPLICATIONToolStripMenuItem.Text = "APPLICATION";
+            resources.ApplyResources(this.homePage, "homePage");
+            this.homePage.BackColor = System.Drawing.Color.White;
+            this.homePage.Controls.Add(this.footer);
+            this.homePage.Controls.Add(this.softwareButton);
+            this.homePage.Controls.Add(this.vendorButton);
+            this.homePage.Controls.Add(this.label1);
+            this.homePage.Controls.Add(this.pictureBox1);
+            this.homePage.Controls.Add(this.SiteDescriptionText);
+            this.homePage.Name = "homePage";
+            this.homePage.Paint += new System.Windows.Forms.PaintEventHandler(this.homePage_Paint);
             // 
-            // Form1
+            // footer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.footer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.footer.Controls.Add(this.label11);
+            resources.ApplyResources(this.footer, "footer");
+            this.footer.Name = "footer";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Name = "label11";
+            // 
+            // softwareButton
+            // 
+            resources.ApplyResources(this.softwareButton, "softwareButton");
+            this.softwareButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.softwareButton.ForeColor = System.Drawing.Color.White;
+            this.softwareButton.Name = "softwareButton";
+            this.softwareButton.UseVisualStyleBackColor = false;
+            this.softwareButton.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // vendorButton
+            // 
+            resources.ApplyResources(this.vendorButton, "vendorButton");
+            this.vendorButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.vendorButton.ForeColor = System.Drawing.Color.White;
+            this.vendorButton.Name = "vendorButton";
+            this.vendorButton.UseVisualStyleBackColor = false;
+            this.vendorButton.Click += new System.EventHandler(this.vendorButton_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label1.Name = "label1";
+            // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // SiteDescriptionText
+            // 
+            resources.ApplyResources(this.SiteDescriptionText, "SiteDescriptionText");
+            this.SiteDescriptionText.Name = "SiteDescriptionText";
+            this.SiteDescriptionText.Click += new System.EventHandler(this.SiteDescriptionText_Click);
+            // 
+            // aboutUs
+            // 
+            resources.ApplyResources(this.aboutUs, "aboutUs");
+            this.aboutUs.Name = "aboutUs";
+            this.aboutUs.Paint += new System.Windows.Forms.PaintEventHandler(this.aboutUs_Paint);
+            // 
+            // logInPage
+            // 
+            resources.ApplyResources(this.logInPage, "logInPage");
+            this.logInPage.BackColor = System.Drawing.Color.White;
+            this.logInPage.Controls.Add(this.pictureBox2);
+            this.logInPage.Controls.Add(this.CitiSoft3);
+            this.logInPage.Controls.Add(this.logInForm);
+            this.logInPage.Name = "logInPage";
+            this.logInPage.Paint += new System.Windows.Forms.PaintEventHandler(this.logInPage_Paint);
+            // 
+            // pictureBox2
+            // 
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
+            // 
+            // CitiSoft3
+            // 
+            resources.ApplyResources(this.CitiSoft3, "CitiSoft3");
+            this.CitiSoft3.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.CitiSoft3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.CitiSoft3.Name = "CitiSoft3";
+            // 
+            // logInForm
+            // 
+            resources.ApplyResources(this.logInForm, "logInForm");
+            this.logInForm.BackColor = System.Drawing.SystemColors.Menu;
+            this.logInForm.Controls.Add(this.label7);
+            this.logInForm.Controls.Add(this.goBackButton);
+            this.logInForm.Controls.Add(this.logInButton);
+            this.logInForm.Controls.Add(this.textBox2);
+            this.logInForm.Controls.Add(this.textBox1);
+            this.logInForm.Controls.Add(this.signUpLink);
+            this.logInForm.Controls.Add(this.label6);
+            this.logInForm.Controls.Add(this.linkLabel1);
+            this.logInForm.Controls.Add(this.label5);
+            this.logInForm.Controls.Add(this.label2);
+            this.logInForm.Name = "logInForm";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // goBackButton
+            // 
+            this.goBackButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            resources.ApplyResources(this.goBackButton, "goBackButton");
+            this.goBackButton.ForeColor = System.Drawing.Color.White;
+            this.goBackButton.Name = "goBackButton";
+            this.goBackButton.UseVisualStyleBackColor = false;
+            this.goBackButton.Click += new System.EventHandler(this.goBackButton_Click);
+            // 
+            // logInButton
+            // 
+            this.logInButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            resources.ApplyResources(this.logInButton, "logInButton");
+            this.logInButton.ForeColor = System.Drawing.Color.White;
+            this.logInButton.Name = "logInButton";
+            this.logInButton.UseVisualStyleBackColor = false;
+            // 
+            // textBox2
+            // 
+            resources.ApplyResources(this.textBox2, "textBox2");
+            this.textBox2.Name = "textBox2";
+            // 
+            // textBox1
+            // 
+            resources.ApplyResources(this.textBox1, "textBox1");
+            this.textBox1.Name = "textBox1";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
+            // signUpLink
+            // 
+            resources.ApplyResources(this.signUpLink, "signUpLink");
+            this.signUpLink.Name = "signUpLink";
+            this.signUpLink.TabStop = true;
+            this.signUpLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.signUpLink_LinkClicked);
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // linkLabel1
+            // 
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.TabStop = true;
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // signUpPage
+            // 
+            resources.ApplyResources(this.signUpPage, "signUpPage");
+            this.signUpPage.Controls.Add(this.label4);
+            this.signUpPage.Controls.Add(this.pictureBox3);
+            this.signUpPage.Controls.Add(this.signUpForm);
+            this.signUpPage.Name = "signUpPage";
+            this.signUpPage.Paint += new System.Windows.Forms.PaintEventHandler(this.signUpPage_Paint);
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.BackColor = System.Drawing.Color.White;
+            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label4.Name = "label4";
+            // 
+            // pictureBox3
+            // 
+            resources.ApplyResources(this.pictureBox3, "pictureBox3");
+            this.pictureBox3.BackColor = System.Drawing.Color.White;
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.TabStop = false;
+            // 
+            // signUpForm
+            // 
+            resources.ApplyResources(this.signUpForm, "signUpForm");
+            this.signUpForm.BackColor = System.Drawing.Color.SeaShell;
+            this.signUpForm.Controls.Add(this.addressLabel);
+            this.signUpForm.Controls.Add(this.contactLabel);
+            this.signUpForm.Controls.Add(this.textBox8);
+            this.signUpForm.Controls.Add(this.textBox7);
+            this.signUpForm.Controls.Add(this.comboBox1);
+            this.signUpForm.Controls.Add(this.genderLabel);
+            this.signUpForm.Controls.Add(this.button2);
+            this.signUpForm.Controls.Add(this.passwordLabel);
+            this.signUpForm.Controls.Add(this.emailLabel);
+            this.signUpForm.Controls.Add(this.textBox6);
+            this.signUpForm.Controls.Add(this.textBox5);
+            this.signUpForm.Controls.Add(this.label8);
+            this.signUpForm.Controls.Add(this.goBackButtonS);
+            this.signUpForm.Controls.Add(this.textBox3);
+            this.signUpForm.Controls.Add(this.textBox4);
+            this.signUpForm.Controls.Add(this.logInLink);
+            this.signUpForm.Controls.Add(this.label9);
+            this.signUpForm.Controls.Add(this.lastnameLabel);
+            this.signUpForm.Controls.Add(this.firstnameLabel);
+            this.signUpForm.Name = "signUpForm";
+            // 
+            // addressLabel
+            // 
+            resources.ApplyResources(this.addressLabel, "addressLabel");
+            this.addressLabel.Name = "addressLabel";
+            // 
+            // contactLabel
+            // 
+            resources.ApplyResources(this.contactLabel, "contactLabel");
+            this.contactLabel.Name = "contactLabel";
+            // 
+            // textBox8
+            // 
+            resources.ApplyResources(this.textBox8, "textBox8");
+            this.textBox8.Name = "textBox8";
+            // 
+            // textBox7
+            // 
+            resources.ApplyResources(this.textBox7, "textBox7");
+            this.textBox7.Name = "textBox7";
+            // 
+            // comboBox1
+            // 
+            resources.ApplyResources(this.comboBox1, "comboBox1");
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            resources.GetString("comboBox1.Items"),
+            resources.GetString("comboBox1.Items1")});
+            this.comboBox1.Name = "comboBox1";
+            // 
+            // genderLabel
+            // 
+            resources.ApplyResources(this.genderLabel, "genderLabel");
+            this.genderLabel.Name = "genderLabel";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // passwordLabel
+            // 
+            resources.ApplyResources(this.passwordLabel, "passwordLabel");
+            this.passwordLabel.Name = "passwordLabel";
+            // 
+            // emailLabel
+            // 
+            resources.ApplyResources(this.emailLabel, "emailLabel");
+            this.emailLabel.Name = "emailLabel";
+            // 
+            // textBox6
+            // 
+            resources.ApplyResources(this.textBox6, "textBox6");
+            this.textBox6.Name = "textBox6";
+            // 
+            // textBox5
+            // 
+            resources.ApplyResources(this.textBox5, "textBox5");
+            this.textBox5.Name = "textBox5";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // goBackButtonS
+            // 
+            this.goBackButtonS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            resources.ApplyResources(this.goBackButtonS, "goBackButtonS");
+            this.goBackButtonS.ForeColor = System.Drawing.Color.White;
+            this.goBackButtonS.Name = "goBackButtonS";
+            this.goBackButtonS.UseVisualStyleBackColor = false;
+            this.goBackButtonS.Click += new System.EventHandler(this.goBackButtonS_Click);
+            // 
+            // textBox3
+            // 
+            resources.ApplyResources(this.textBox3, "textBox3");
+            this.textBox3.Name = "textBox3";
+            // 
+            // textBox4
+            // 
+            resources.ApplyResources(this.textBox4, "textBox4");
+            this.textBox4.Name = "textBox4";
+            // 
+            // logInLink
+            // 
+            resources.ApplyResources(this.logInLink, "logInLink");
+            this.logInLink.Name = "logInLink";
+            this.logInLink.TabStop = true;
+            this.logInLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.logInLink_LinkClicked);
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // lastnameLabel
+            // 
+            resources.ApplyResources(this.lastnameLabel, "lastnameLabel");
+            this.lastnameLabel.Name = "lastnameLabel";
+            // 
+            // firstnameLabel
+            // 
+            resources.ApplyResources(this.firstnameLabel, "firstnameLabel");
+            this.firstnameLabel.Name = "firstnameLabel";
+            // 
+            // vendorPage
+            // 
+            resources.ApplyResources(this.vendorPage, "vendorPage");
+            this.vendorPage.BackColor = System.Drawing.Color.Black;
+            this.vendorPage.Controls.Add(this.label3);
+            this.vendorPage.Name = "vendorPage";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Name = "label3";
+            // 
+            // softwarePage
+            // 
+            resources.ApplyResources(this.softwarePage, "softwarePage");
+            this.softwarePage.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.softwarePage.Name = "softwarePage";
+            // 
+            // application
+            // 
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1241, 1055);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Controls.Add(this.header);
+            this.Controls.Add(this.signUpPage);
+            this.Controls.Add(this.softwarePage);
+            this.Controls.Add(this.logInPage);
+            this.Controls.Add(this.homePage);
+            this.Controls.Add(this.aboutUs);
+            this.Controls.Add(this.vendorPage);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.Name = "Form1";
+            this.Name = "application";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "SoftTech";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.header.ResumeLayout(false);
+            this.header.PerformLayout();
+            this.HeaderSearch.ResumeLayout(false);
+            this.HeaderSearch.PerformLayout();
+            this.menuFunctions.ResumeLayout(false);
+            this.menuFunctions.PerformLayout();
+            this.homePage.ResumeLayout(false);
+            this.homePage.PerformLayout();
+            this.footer.ResumeLayout(false);
+            this.footer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.logInPage.ResumeLayout(false);
+            this.logInPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.logInForm.ResumeLayout(false);
+            this.logInForm.PerformLayout();
+            this.signUpPage.ResumeLayout(false);
+            this.signUpPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.signUpForm.ResumeLayout(false);
+            this.signUpForm.PerformLayout();
+            this.vendorPage.ResumeLayout(false);
+            this.vendorPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label SoftTech;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.Panel header;
+        private System.Windows.Forms.TextBox searchText;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.Panel HeaderSearch;
+        private System.Windows.Forms.Label CitiSoft;
+        private System.Windows.Forms.MenuStrip menuFunctions;
         private System.Windows.Forms.ToolStripMenuItem hOMEToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem vENDORSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aBOUTUSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aPPLICATIONToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lOGINToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sIGNUPToolStripMenuItem;
+        private System.Windows.Forms.Panel homePage;
+        private Panel aboutUs;
+        private Label SiteDescriptionText;
+        private Panel logInPage;
+        private Panel signUpPage;
+        private PictureBox pictureBox1;
+        private Label label1;
+        private Button softwareButton;
+        private Button vendorButton;
+        private Panel vendorPage;
+        private Label label3;
+        private Panel softwarePage;
+        private Label CitiSoft3;
+        private Panel logInForm;
+        private Label label2;
+        private TextBox textBox2;
+        private TextBox textBox1;
+        private LinkLabel signUpLink;
+        private Label label6;
+        private LinkLabel linkLabel1;
+        private Label label5;
+        private Button goBackButton;
+        private Button logInButton;
+        private PictureBox pictureBox2;
+        private Label label7;
+        private Panel signUpForm;
+        private Label label8;
+        private Button goBackButtonS;
+        private Button button2;
+        private TextBox textBox3;
+        private TextBox textBox4;
+        private LinkLabel logInLink;
+        private Label label9;
+        private Label lastnameLabel;
+        private Label firstnameLabel;
+        private TextBox textBox6;
+        private TextBox textBox5;
+        private Label passwordLabel;
+        private Label emailLabel;
+        private Label genderLabel;
+        private ComboBox comboBox1;
+        private Label addressLabel;
+        private Label contactLabel;
+        private TextBox textBox8;
+        private TextBox textBox7;
+        private PictureBox pictureBox3;
+        private Label label4;
+        private Label label11;
+        private Panel footer;
     }
 }
 

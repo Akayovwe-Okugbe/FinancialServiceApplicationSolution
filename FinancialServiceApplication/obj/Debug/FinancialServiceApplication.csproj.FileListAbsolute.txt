@@ -8,3 +8,13 @@ C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceA
 C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.csproj.CoreCompileInputs.cache
 C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.exe
 C:\Users\Home\source\repos\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.pdb
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\FinancialServiceApplication.exe.config
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\FinancialServiceApplication.exe
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\FinancialServiceApplication.pdb
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.csproj.AssemblyReference.cache
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.Properties.Resources.resources
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.csproj.GenerateResource.cache
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.csproj.CoreCompileInputs.cache
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.exe
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.pdb
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.application.resources
