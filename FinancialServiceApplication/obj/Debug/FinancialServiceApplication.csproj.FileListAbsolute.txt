@@ -18,3 +18,16 @@ C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\F
 C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.exe
 C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.pdb
 C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.application.resources
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\FinancialConsultantDB.mdf
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\FinancialConsultantDB_log.ldf
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\BCrypt.Net-Next.dll
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\System.Buffers.dll
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\System.Memory.dll
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\BCrypt.Net-Next.xml
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\System.Buffers.xml
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\System.Memory.xml
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Home\Source\Repos\Akayovwe-Okugbe\FinancialServiceApplicationSolution\FinancialServiceApplication\obj\Debug\FinancialServiceApplication.csproj.CopyComplete
