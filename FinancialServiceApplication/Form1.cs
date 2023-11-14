@@ -20,12 +20,16 @@ namespace FinancialServiceApplication
 
         //
         ArrayList parameterList = new ArrayList();
+        DBConnection dbconnection = DBConnection.getInstanceOfDBConnection();
+        SqlQueries sqlQueries = new SqlQueries();
 
         public application()
         {
             InitializeComponent();
 
-    }
+
+
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -39,6 +43,8 @@ namespace FinancialServiceApplication
             listPanel.Add(footer);
             listPanel.Add(vendorPage);
             listPanel.Add(softwarePage);
+            listPanel.Add(vendorDisplay);
+            listPanel.Add(addVendorPanel);
         }
 
         //
@@ -46,7 +52,7 @@ namespace FinancialServiceApplication
         // METHODS
         //
         //
-        private void CheckSignUpTextBoxes ()
+        private void CheckSignUpTextBoxes()
         {
             /* This code checks all the text boxes in the sign up page if it is not null or empty.
             * This ensures the user enter details in all the required fields before displaying the signup button
@@ -54,16 +60,16 @@ namespace FinancialServiceApplication
             if (!string.IsNullOrEmpty(firstnameBox.Text) && !string.IsNullOrEmpty(lastnameBox.Text) &&
                 !string.IsNullOrEmpty(emailBox.Text) && !string.IsNullOrEmpty(passwordBox.Text) &&
                 !string.IsNullOrEmpty(genderBox.Text) && !string.IsNullOrEmpty(mobileBox.Text) &&
-                !string.IsNullOrEmpty(addressBox.Text) && !string.IsNullOrEmpty(postcodeBox.Text) && 
+                !string.IsNullOrEmpty(addressBox.Text) && !string.IsNullOrEmpty(postcodeBox.Text) &&
                 !string.IsNullOrEmpty(countryBox.Text))
             {
                 // The signup button is displayed if the required fields are not null
-                signUpButton.Visible = true;  
+                signUpButton.Visible = true;
             }
-            else 
+            else
             {
                 // Else the button stays invisible
-                signUpButton.Visible = false; 
+                signUpButton.Visible = false;
             }
         }
 
@@ -152,12 +158,16 @@ namespace FinancialServiceApplication
 
         private void CompanyButton_Click(object sender, EventArgs e)
         {
-            PanelVisibility(header, footer, vendorPage);
+
+            PanelVisibility(header, footer, vendorPage, vendorDisplay);
+
         }
 
         private void SoftwareButton_Click(object sender, EventArgs e)
         {
             PanelVisibility(header, footer, softwarePage);
+            displaySoftwarePanel.Visible = true;
+            addSoftwarePanel.Visible = false;
         }
 
         //
@@ -208,7 +218,7 @@ namespace FinancialServiceApplication
             // Assign parameters to the text boxes
             string email = logInEmailBox.Text;
             string password = logInPasswordBox.Text;
-            
+
             //Save to the Database
             bool userValidated = DBConnection.getInstanceOfDBConnection().ValidateUser(email, password);
 
@@ -364,7 +374,7 @@ namespace FinancialServiceApplication
             menuFunctions.Visible = true;
             PanelVisibility(header, footer, homePage);
         }
-       
+
         private void LogInLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             menuFunctions.Visible = false;
@@ -426,5 +436,128 @@ namespace FinancialServiceApplication
         {
             greetingLabel.Text = $"Welcome, {firstname}! [{role}]";
         }
+
+        private void vendorPage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void BtnShowVendorPage_Click(object sender, EventArgs e)
+        {
+            vendorDisplay.Visible = false;
+            addVendorPanel.Visible = true;
+
+        }
+
+        private void btnAddVendor_Click(object sender, EventArgs e)
+        {
+
+            string company_name = companyNameTextBox.Text;
+            string company_website = websiteTextBox.Text;
+            string company_established = establishedDateTextBox.Text;
+            string no_of_employees = numEployeesTextBox.Text;
+
+            if (!string.IsNullOrEmpty(companyNameTextBox.Text) && !string.IsNullOrEmpty(websiteTextBox.Text) &&
+                !string.IsNullOrEmpty(establishedDateTextBox.Text) && !string.IsNullOrEmpty(numEployeesTextBox.Text))
+            {
+                DBConnection.getInstanceOfDBConnection().AddVendorToDatabase(SqlQueries.ADD_NEW_VENDOR, company_name, company_website, company_established, no_of_employees);
+            }
+            else
+            {
+                MessageBox.Show("PLEASE ENTER ALL THE DETAILS!", "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
+        }
+
+        private void BtnShowVendors_Click(object sender, EventArgs e)
+        {
+            vendorDisplay.Visible = true;
+            addVendorPanel.Visible = false;
+        }
+
+        private void BtnShowHomePage_Click(object sender, EventArgs e)
+        {
+            menuFunctions.Visible = true;
+            PanelVisibility(homePage, searchText);
+        }
+
+        private void vendorDisplay_Paint(object sender, PaintEventArgs e)
+        {
+            DataSet getVendor = dbconnection.LoadVendors(sqlQueries.displayVendor());
+            displayVendorInGridView.DataSource = getVendor.Tables[0];
+        }
+
+        private void addSoftwarePanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string software_name = softwareNameTextBox.Text;
+            //string software_id = softwareIDTextBox.Text;
+            string description = softwareDescriptionTextBox.Text;
+            //string no_of_employees = numEployeesTextBox.Text;
+            string ref_no = ref_no_TextBox.Text;
+
+            if (!string.IsNullOrEmpty(softwareNameTextBox.Text) && 
+                !string.IsNullOrEmpty(softwareDescriptionTextBox.Text) && !string.IsNullOrEmpty(ref_no_TextBox.Text))
+            //))
+            {
+                DBConnection.getInstanceOfDBConnection().AddSoftwareToDatabase(SqlQueries.ADD_NEW_SOFTWARE, software_name, ref_no, description);
+            }
+            else
+            {
+                MessageBox.Show("PLEASE ENTER ALL THE DETAILS!", "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnAddSoft_Click(object sender, EventArgs e)
+        {
+            PanelVisibility(header, footer, softwarePage);
+            displaySoftwarePanel.Visible = false;
+            addSoftwarePanel.Visible = true;
+        }
+
+        private void BtnGoBackToHomePage_Click(object sender, EventArgs e)
+        {
+            //homePage.Visible = true;
+            //softwarePage.Visible = false;
+            menuFunctions.Visible = true;
+            PanelVisibility(homePage, searchText);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            displaySoftwarePanel.Visible = true;
+            addSoftwarePanel.Visible = false;
+            //PanelVisibility(homePage, searchText);
+        }
+
+        private void displayVendorInGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void displaySoftwarePanel_Paint(object sender, PaintEventArgs e)
+        {
+            DataSet getSoftware = dbconnection.LoadSoftware(sqlQueries.displaySoftware());
+            dataGridView2.DataSource = getSoftware.Tables[0];
+            
+        }
+
+        private void BtnUploadFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
