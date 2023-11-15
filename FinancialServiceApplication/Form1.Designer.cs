@@ -976,12 +976,12 @@ namespace FinancialServiceApplication
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.header);
-            this.Controls.Add(this.softwarePage);
-            this.Controls.Add(this.logInPage);
             this.Controls.Add(this.homePage);
             this.Controls.Add(this.aboutUs);
             this.Controls.Add(this.vendorPage);
             this.Controls.Add(this.signUpPage);
+            this.Controls.Add(this.softwarePage);
+            this.Controls.Add(this.logInPage);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.Name = "application";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;

@@ -55,6 +55,16 @@ namespace FinancialServiceApplication
             return _instance;
         }
 
+        //
+        //
+        //
+        //
+        // SIGN UP AND LOG IN
+        //
+        //
+        //
+        //
+
         public void saveToDatabase(string sqlQuery, ArrayList parameters)
         {
 
@@ -111,7 +121,7 @@ namespace FinancialServiceApplication
                         string hashedPassword = reader["password"].ToString();
                         string role = reader["role"].ToString();
 
-                        //DisplayGreeting(firstname, role);
+                        // Application.DisplayGreeting(firstname, role);
 
                         return hashedPassword;
                     }
@@ -137,6 +147,16 @@ namespace FinancialServiceApplication
 
             return false;
         }
+        
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
 
         public void AddVendorToDatabase(string sqlQuery, string company_name, string company_website, string established_date, string no_of_employees)
         {
@@ -168,7 +188,7 @@ namespace FinancialServiceApplication
 
         }
 
-        public void AddSoftwareToDatabase(string sqlQuery, string software_name, string ref_no, string description)
+        public void AddSoftwareToDatabase(string sqlQuery, string software_name, int ref_no, string description)
         {
             using (SqlConnection connectToDB = new SqlConnection(connectionString))
             {

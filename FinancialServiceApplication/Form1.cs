@@ -20,14 +20,14 @@ namespace FinancialServiceApplication
 
         //
         ArrayList parameterList = new ArrayList();
+
+        //
         DBConnection dbconnection = DBConnection.getInstanceOfDBConnection();
         SqlQueries sqlQueries = new SqlQueries();
 
         public application()
         {
             InitializeComponent();
-
-
 
         }
 
@@ -500,11 +500,12 @@ namespace FinancialServiceApplication
             //string software_id = softwareIDTextBox.Text;
             string description = softwareDescriptionTextBox.Text;
             //string no_of_employees = numEployeesTextBox.Text;
-            string ref_no = ref_no_TextBox.Text;
+            int ref_no = int.Parse(ref_no_TextBox.Text);
+            // Converts the string to an int
 
             if (!string.IsNullOrEmpty(softwareNameTextBox.Text) && 
-                !string.IsNullOrEmpty(softwareDescriptionTextBox.Text) && !string.IsNullOrEmpty(ref_no_TextBox.Text))
-            //))
+                !string.IsNullOrEmpty(softwareDescriptionTextBox.Text) && 
+                !string.IsNullOrEmpty(ref_no_TextBox.Text))
             {
                 DBConnection.getInstanceOfDBConnection().AddSoftwareToDatabase(SqlQueries.ADD_NEW_SOFTWARE, software_name, ref_no, description);
             }
