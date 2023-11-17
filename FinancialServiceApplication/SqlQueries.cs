@@ -15,7 +15,7 @@ namespace FinancialServiceApplication
         public static string VALIDATE_LOGIN_DETAILS = "SELECT firstname, password, role FROM [USER] WHERE email = @email";
 
         public static string ADD_NEW_VENDOR = "INSERT INTO COMPANY([company_name], [company_website], [company_established], [no_of_employees] ) VALUES(@company_name, @company_website, @company_established, @no_of_employees)";
-        public static string ADD_NEW_SOFTWARE = " INSERT INTO SOFTWARE ([software_name], [description]) VALUES (@software_name, @description)";
+        public static string ADD_NEW_SOFTWARE = " INSERT INTO SOFTWARE ([software_name], [description], [document_to_attach]) VALUES (@software_name, @description, @document_to_attach)";
 
         public string displayVendor()
         {
@@ -26,6 +26,29 @@ namespace FinancialServiceApplication
         {
             string DISPLAY_SOFTWARE = "SELECT * FROM SOFTWARE";
             return DISPLAY_SOFTWARE;
+        }
+
+        public string updateVendor(int ref_no)
+        {
+
+            return $"UPDATE COMPANY SET company_name= @company_name, company_website=@company_website, company_established= @company_established WHERE ref_no = '{ref_no}'";
+        }
+
+        public string deleteVendor(int ref_no)
+        {
+            return $"DELETE FROM COMPANY WHERE ref_no = {ref_no}";
+        }
+
+
+        public string updateSoftware(int software_id)
+        {
+
+            return $"UPDATE SOFTWARE SET software_name= @software_name, description=@description, document_to_attach= @document_to_attach WHERE software_id = '{software_id}'";
+        }
+
+        public string deleteSoftware(int software_id)
+        {
+            return $"DELETE FROM SOFTWARE WHERE software_id = {software_id}";
         }
     }
 

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FinancialServiceApplication
 {
@@ -45,6 +46,10 @@ namespace FinancialServiceApplication
             listPanel.Add(softwarePage);
             listPanel.Add(vendorDisplay);
             listPanel.Add(addVendorPanel);
+            listPanel.Add(updateVendorPanel);
+            listPanel.Add(displaySoftwarePanel);
+            listPanel.Add(addSoftwarePanel);
+            listPanel.Add(softwareUpdatePanel);
         }
 
         //
@@ -158,16 +163,14 @@ namespace FinancialServiceApplication
 
         private void CompanyButton_Click(object sender, EventArgs e)
         {
-
-            PanelVisibility(header, footer, vendorPage, vendorDisplay);
-
+            PanelVisibility(vendorPage, vendorDisplay);
+            deleteVendorPanel.Visible = false;
         }
 
         private void SoftwareButton_Click(object sender, EventArgs e)
         {
-            PanelVisibility(header, footer, softwarePage);
-            displaySoftwarePanel.Visible = true;
-            addSoftwarePanel.Visible = false;
+            PanelVisibility(softwarePage, displaySoftwarePanel);
+            deleteSoftwarePanel.Visible = false;               
         }
 
         //
@@ -436,19 +439,17 @@ namespace FinancialServiceApplication
         {
             greetingLabel.Text = $"Welcome, {firstname}! [{role}]";
         }
-
         private void vendorPage_Paint(object sender, PaintEventArgs e)
         {
-
         }
-
         private void BtnShowVendorPage_Click(object sender, EventArgs e)
         {
+            deleteVendorPanel.Visible = false;
             vendorDisplay.Visible = false;
             addVendorPanel.Visible = true;
+            updateVendorPanel.Visible = false;        
 
         }
-
         private void btnAddVendor_Click(object sender, EventArgs e)
         {
 
@@ -456,30 +457,82 @@ namespace FinancialServiceApplication
             string company_website = websiteTextBox.Text;
             string company_established = establishedDateTextBox.Text;
             string no_of_employees = numEployeesTextBox.Text;
+            //string ref_no = updateRefNoTextBox.Text;
 
             if (!string.IsNullOrEmpty(companyNameTextBox.Text) && !string.IsNullOrEmpty(websiteTextBox.Text) &&
                 !string.IsNullOrEmpty(establishedDateTextBox.Text) && !string.IsNullOrEmpty(numEployeesTextBox.Text))
             {
                 DBConnection.getInstanceOfDBConnection().AddVendorToDatabase(SqlQueries.ADD_NEW_VENDOR, company_name, company_website, company_established, no_of_employees);
+                companyNameTextBox.Text = "";
+                websiteTextBox.Text = "";
+                establishedDateTextBox.Text = "";
+                numEployeesTextBox.Text = "";
+                vendorDisplay.Visible = true;
             }
             else
             {
                 MessageBox.Show("PLEASE ENTER ALL THE DETAILS!", "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
 
-
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            VENDOR.changeVendor(dbconnection, sqlQueries, Convert.ToInt16(updateRefNoTextBox.Text), comTextBox.Text, webTextBox.Text, estTextBox.Text, empTextBox.Text);
+            updateRefNoTextBox.Text = "";
+            comTextBox.Text = "";
+            webTextBox.Text = "";
+            estTextBox.Text = "";
+            empTextBox.Text = "";
+            // MessageBox.Show("UPDATE IS SUCCESSFUL");
+            vendorDisplay.Visible = true;
+        }
+        private void deleteVendorBtn_Click(object sender, EventArgs e)
+        {
+            VENDOR.eraseVendor(dbconnection, sqlQueries, Convert.ToInt16(deleteVendorUsinRefNo.Text));
+            deleteVendorUsinRefNo.Text = "";
+            vendorDisplay.Visible = true;
         }
 
         private void BtnShowVendors_Click(object sender, EventArgs e)
-        {
+        {          
             vendorDisplay.Visible = true;
             addVendorPanel.Visible = false;
+            updateVendorPanel.Visible =false;
+            deleteVendorPanel.Visible = false;
         }
 
         private void BtnShowHomePage_Click(object sender, EventArgs e)
         {
             menuFunctions.Visible = true;
             PanelVisibility(homePage, searchText);
+        }     
+        private void fromDeleteVendorToVendorDisplay_Click(object sender, EventArgs e)
+        {
+            deleteVendorPanel.Visible = false;
+            vendorDisplay.Visible = true;
+            addVendorPanel.Visible = false;
+            updateVendorPanel.Visible = false;
+        }
+        private void btnGoBackToAddingVendor_Click(object sender, EventArgs e)
+        {
+            deleteVendorPanel.Visible = false;
+            vendorDisplay.Visible = false;
+            addVendorPanel.Visible = true;
+            updateVendorPanel.Visible = false;
+        }
+        private void BtnUpdatePage_Click(object sender, EventArgs e)
+        {
+            updateVendorPanel.Visible = true;
+            vendorDisplay.Visible = false;
+            addVendorPanel.Visible = false;
+            deleteVendorPanel.Visible = false;
+        }
+        private void BtnGoToDeleteVendorPanel_Click(object sender, EventArgs e)
+        {
+            deleteVendorPanel.Visible = true;
+            vendorDisplay.Visible = false;
+            addVendorPanel.Visible = false;
+            updateVendorPanel.Visible = false;
         }
 
         private void vendorDisplay_Paint(object sender, PaintEventArgs e)
@@ -487,78 +540,137 @@ namespace FinancialServiceApplication
             DataSet getVendor = dbconnection.LoadVendors(sqlQueries.displayVendor());
             displayVendorInGridView.DataSource = getVendor.Tables[0];
         }
-
         private void addSoftwarePanel_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-
-        private void button3_Click(object sender, EventArgs e)
+        private void btnAddSoftwareToDatabase_Click(object sender, EventArgs e)
         {
-            string software_name = softwareNameTextBox.Text;
-            //string software_id = softwareIDTextBox.Text;
-            string description = softwareDescriptionTextBox.Text;
-            //string no_of_employees = numEployeesTextBox.Text;
-            int ref_no = int.Parse(ref_no_TextBox.Text);
-            // Converts the string to an int
+            try
+            {
+                byte[] pdf = File.ReadAllBytes(pathFile.Text);
+                string software_name = softwareNameTextBox.Text;  
+                string description = softwareDescriptionTextBox.Text;
+                string document_to_attach = pathFile.Text;
+                int ref_no;                
 
-            if (!string.IsNullOrEmpty(softwareNameTextBox.Text) && 
-                !string.IsNullOrEmpty(softwareDescriptionTextBox.Text) && 
-                !string.IsNullOrEmpty(ref_no_TextBox.Text))
-            {
-                DBConnection.getInstanceOfDBConnection().AddSoftwareToDatabase(SqlQueries.ADD_NEW_SOFTWARE, software_name, ref_no, description);
+                if (!string.IsNullOrEmpty(softwareNameTextBox.Text) &&
+                !string.IsNullOrEmpty(softwareDescriptionTextBox.Text) &&
+                !string.IsNullOrEmpty(pathFile.Text))
+                {
+                    DBConnection.getInstanceOfDBConnection().AddSoftwareToDatabase(SqlQueries.ADD_NEW_SOFTWARE, software_name, description, document_to_attach);
+                    softwareNameTextBox.Text = "";
+                    softwareDescriptionTextBox.Text = "";
+                    pathFile.Text = "";
+                    displaySoftwarePanel.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("PLEASE ENTER ALL THE DETAILS!", "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("PLEASE ENTER ALL THE DETAILS!", "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        private void updateSoftware_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SOFTWARE.changeSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDescTextBox.Text, filePath.Text);
+                softIDTextBox.Text = "";
+                updateSoftNameTextBox.Text = "";
+                updateSoftDescTextBox.Text = "";
+                filePath.Text = "";
+                MessageBox.Show("UPDATE IS SUCCESSFUL");
+                displaySoftwarePanel.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR OCCURED:{ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void btnAddSoft_Click(object sender, EventArgs e)
         {
-            PanelVisibility(header, footer, softwarePage);
+            deleteSoftwarePanel.Visible = false;
+            softwareUpdatePanel.Visible = false;
             displaySoftwarePanel.Visible = false;
             addSoftwarePanel.Visible = true;
         }
-
         private void BtnGoBackToHomePage_Click(object sender, EventArgs e)
-        {
-            //homePage.Visible = true;
-            //softwarePage.Visible = false;
+        {          
             menuFunctions.Visible = true;
             PanelVisibility(homePage, searchText);
-
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
+            deleteSoftwarePanel.Visible = false;
             displaySoftwarePanel.Visible = true;
             addSoftwarePanel.Visible = false;
-            //PanelVisibility(homePage, searchText);
+            softwareUpdatePanel.Visible = false;
         }
-
         private void displayVendorInGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
-
         private void displaySoftwarePanel_Paint(object sender, PaintEventArgs e)
         {
             DataSet getSoftware = dbconnection.LoadSoftware(sqlQueries.displaySoftware());
             dataGridView2.DataSource = getSoftware.Tables[0];
             
-        }
-
-        private void BtnUploadFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        }       
         private void button3_Click_1(object sender, EventArgs e)
         {
-
+            pathFile.Text = SOFTWARE.pdfAttach();
+        }      
+        private void updateBrowse_Click(object sender, EventArgs e)
+        {
+            filePath.Text = SOFTWARE.pdfAttach();
         }
+        private void updateSoft_Click(object sender, EventArgs e)
+        {           
+            deleteSoftwarePanel.Visible = false;
+            softwareUpdatePanel.Visible = true;
+            displaySoftwarePanel.Visible = false;
+            addSoftwarePanel.Visible = false;
+        }     
+        private void filePath_Click(object sender, EventArgs e)
+        { }
+
+        private void btnBacToAddingSoftware_Click(object sender, EventArgs e)
+        {
+            deleteSoftwarePanel.Visible = false;
+            displaySoftwarePanel.Visible = true;
+            addSoftwarePanel.Visible = false;
+            softwareUpdatePanel.Visible = false;
+        }                 
+        private void header_Paint(object sender, PaintEventArgs e)
+        {
+
+        }       
+        private void btnDeleteSoftwareFromDatabase_Click_1(object sender, EventArgs e)
+        {
+            SOFTWARE.eraseSoftware(dbconnection, sqlQueries, Convert.ToInt16(deleteSoftwareUsingSoftID.Text));
+            deleteSoftwareUsingSoftID.Text = "";
+            displaySoftwarePanel.Visible = true;
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            softwareUpdatePanel.Visible = false;
+            displaySoftwarePanel.Visible = true;
+            addSoftwarePanel.Visible = false;
+            deleteSoftwarePanel.Visible = false;
+        }
+
+        private void BtnGoToDeleteSoftware_Click(object sender, EventArgs e)
+        {
+            softwareUpdatePanel.Visible = false;
+            displaySoftwarePanel.Visible = false;
+            addSoftwarePanel.Visible = false;
+            deleteSoftwarePanel.Visible = true;
+        }            
     }
 }
 

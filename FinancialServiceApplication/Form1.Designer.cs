@@ -100,30 +100,70 @@ namespace FinancialServiceApplication
             this.lastnameLabel = new System.Windows.Forms.Label();
             this.firstnameLabel = new System.Windows.Forms.Label();
             this.vendorPage = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.vendorDisplay = new System.Windows.Forms.Panel();
+            this.deleteVendorPanel = new System.Windows.Forms.Panel();
+            this.deleteVendorBtn = new System.Windows.Forms.Button();
+            this.fromDeleteVendorToVendorDisplay = new System.Windows.Forms.Button();
+            this.deleteVendorUsinRefNo = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.updateVendorPanel = new System.Windows.Forms.Panel();
+            this.btnGoBackToAddingVendor = new System.Windows.Forms.Button();
+            this.updateBtn = new System.Windows.Forms.Button();
+            this.estTextBox = new System.Windows.Forms.TextBox();
+            this.empTextBox = new System.Windows.Forms.TextBox();
+            this.webTextBox = new System.Windows.Forms.TextBox();
+            this.comTextBox = new System.Windows.Forms.TextBox();
+            this.updateRefNoTextBox = new System.Windows.Forms.TextBox();
+            this.labelEstablish = new System.Windows.Forms.Label();
+            this.labelEmployees = new System.Windows.Forms.Label();
+            this.labelWebsite = new System.Windows.Forms.Label();
+            this.labelCompanyName = new System.Windows.Forms.Label();
+            this.labelRefNo = new System.Windows.Forms.Label();
             this.addVendorPanel = new System.Windows.Forms.Panel();
-            this.establishedDateTextBox = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.numEployeesTextBox = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.btnAddVendor = new System.Windows.Forms.Button();
             this.websiteTextBox = new System.Windows.Forms.TextBox();
             this.companyNameTextBox = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.BtnShowVendors = new System.Windows.Forms.Button();
-            this.BtnShowHomePage = new System.Windows.Forms.Button();
+            this.establishedDateTextBox = new System.Windows.Forms.TextBox();
+            this.numEployeesTextBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.vendorDisplay = new System.Windows.Forms.Panel();
+            this.BtnUpdatePage = new System.Windows.Forms.Button();
             this.BtnShowVendorPage = new System.Windows.Forms.Button();
+            this.BtnShowHomePage = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.displayVendorInGridView = new System.Windows.Forms.DataGridView();
             this.softwarePage = new System.Windows.Forms.Panel();
-            this.addSoftwarePanel = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.BtnUploadFile = new System.Windows.Forms.Button();
+            this.deleteSoftwarePanel = new System.Windows.Forms.Panel();
+            this.btnDeleteSoftwareFromDatabase = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.deleteSoftwareUsingSoftID = new System.Windows.Forms.TextBox();
+            this.displaySoftwarePanel = new System.Windows.Forms.Panel();
+            this.BtnGoToDeleteSoftware = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.BtnGoBackToHomePage = new System.Windows.Forms.Button();
+            this.updateSoft = new System.Windows.Forms.Button();
+            this.BtnSoftwareAddPage = new System.Windows.Forms.Button();
+            this.btnAddSoft = new System.Windows.Forms.Button();
+            this.softwareUpdatePanel = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
-            this.ref_no_TextBox = new System.Windows.Forms.TextBox();
+            this.btnBacToAddingSoftware = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.softIDTextBox = new System.Windows.Forms.TextBox();
+            this.updateSoftware = new System.Windows.Forms.Button();
+            this.updateBrowse = new System.Windows.Forms.Button();
+            this.updateSoftDescTextBox = new System.Windows.Forms.TextBox();
+            this.updateSoftNameTextBox = new System.Windows.Forms.TextBox();
+            this.filePath = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.addSoftwarePanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.softwareDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.softwareNameTextBox = new System.Windows.Forms.TextBox();
@@ -131,15 +171,12 @@ namespace FinancialServiceApplication
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.btnAddSoftware = new System.Windows.Forms.Button();
-            this.displaySoftwarePanel = new System.Windows.Forms.Panel();
-            this.btnAddSoft = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.button4 = new System.Windows.Forms.Button();
-            this.BtnSoftwareAddPage = new System.Windows.Forms.Button();
-            this.label24 = new System.Windows.Forms.Label();
-            this.BtnGoBackToHomePage = new System.Windows.Forms.Button();
+            this.pathFile = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
+            this.BtnGoToDeleteVendorPanel = new System.Windows.Forms.Button();
             this.header.SuspendLayout();
             this.HeaderSearch.SuspendLayout();
             this.menuFunctions.SuspendLayout();
@@ -155,13 +192,17 @@ namespace FinancialServiceApplication
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.signUpForm.SuspendLayout();
             this.vendorPage.SuspendLayout();
-            this.vendorDisplay.SuspendLayout();
+            this.deleteVendorPanel.SuspendLayout();
+            this.updateVendorPanel.SuspendLayout();
             this.addVendorPanel.SuspendLayout();
+            this.vendorDisplay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.displayVendorInGridView)).BeginInit();
             this.softwarePage.SuspendLayout();
-            this.addSoftwarePanel.SuspendLayout();
+            this.deleteSoftwarePanel.SuspendLayout();
             this.displaySoftwarePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.softwareUpdatePanel.SuspendLayout();
+            this.addSoftwarePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // header
@@ -173,6 +214,7 @@ namespace FinancialServiceApplication
             this.header.Controls.Add(this.HeaderSearch);
             this.header.Controls.Add(this.menuFunctions);
             this.header.Name = "header";
+            this.header.Paint += new System.Windows.Forms.PaintEventHandler(this.header_Paint);
             // 
             // greetingLabel
             // 
@@ -666,68 +708,150 @@ namespace FinancialServiceApplication
             // 
             resources.ApplyResources(this.vendorPage, "vendorPage");
             this.vendorPage.BackColor = System.Drawing.Color.DarkGray;
-            this.vendorPage.Controls.Add(this.label3);
             this.vendorPage.Controls.Add(this.vendorDisplay);
+            this.vendorPage.Controls.Add(this.deleteVendorPanel);
+            this.vendorPage.Controls.Add(this.updateVendorPanel);
+            this.vendorPage.Controls.Add(this.addVendorPanel);
             this.vendorPage.Name = "vendorPage";
             this.vendorPage.Paint += new System.Windows.Forms.PaintEventHandler(this.vendorPage_Paint);
             // 
-            // label3
+            // deleteVendorPanel
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Name = "label3";
+            this.deleteVendorPanel.Controls.Add(this.deleteVendorBtn);
+            this.deleteVendorPanel.Controls.Add(this.fromDeleteVendorToVendorDisplay);
+            this.deleteVendorPanel.Controls.Add(this.deleteVendorUsinRefNo);
+            this.deleteVendorPanel.Controls.Add(this.label29);
+            resources.ApplyResources(this.deleteVendorPanel, "deleteVendorPanel");
+            this.deleteVendorPanel.Name = "deleteVendorPanel";
             // 
-            // vendorDisplay
+            // deleteVendorBtn
             // 
-            this.vendorDisplay.Controls.Add(this.addVendorPanel);
-            this.vendorDisplay.Controls.Add(this.BtnShowHomePage);
-            this.vendorDisplay.Controls.Add(this.BtnShowVendorPage);
-            this.vendorDisplay.Controls.Add(this.label10);
-            this.vendorDisplay.Controls.Add(this.displayVendorInGridView);
-            resources.ApplyResources(this.vendorDisplay, "vendorDisplay");
-            this.vendorDisplay.Name = "vendorDisplay";
-            this.vendorDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.vendorDisplay_Paint);
+            this.deleteVendorBtn.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.deleteVendorBtn, "deleteVendorBtn");
+            this.deleteVendorBtn.ForeColor = System.Drawing.Color.White;
+            this.deleteVendorBtn.Name = "deleteVendorBtn";
+            this.deleteVendorBtn.UseVisualStyleBackColor = false;
+            this.deleteVendorBtn.Click += new System.EventHandler(this.deleteVendorBtn_Click);
+            // 
+            // fromDeleteVendorToVendorDisplay
+            // 
+            this.fromDeleteVendorToVendorDisplay.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.fromDeleteVendorToVendorDisplay, "fromDeleteVendorToVendorDisplay");
+            this.fromDeleteVendorToVendorDisplay.ForeColor = System.Drawing.Color.White;
+            this.fromDeleteVendorToVendorDisplay.Name = "fromDeleteVendorToVendorDisplay";
+            this.fromDeleteVendorToVendorDisplay.UseVisualStyleBackColor = false;
+            this.fromDeleteVendorToVendorDisplay.Click += new System.EventHandler(this.fromDeleteVendorToVendorDisplay_Click);
+            // 
+            // deleteVendorUsinRefNo
+            // 
+            resources.ApplyResources(this.deleteVendorUsinRefNo, "deleteVendorUsinRefNo");
+            this.deleteVendorUsinRefNo.Name = "deleteVendorUsinRefNo";
+            // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.Name = "label29";
+            // 
+            // updateVendorPanel
+            // 
+            this.updateVendorPanel.Controls.Add(this.btnGoBackToAddingVendor);
+            this.updateVendorPanel.Controls.Add(this.updateBtn);
+            this.updateVendorPanel.Controls.Add(this.estTextBox);
+            this.updateVendorPanel.Controls.Add(this.empTextBox);
+            this.updateVendorPanel.Controls.Add(this.webTextBox);
+            this.updateVendorPanel.Controls.Add(this.comTextBox);
+            this.updateVendorPanel.Controls.Add(this.updateRefNoTextBox);
+            this.updateVendorPanel.Controls.Add(this.labelEstablish);
+            this.updateVendorPanel.Controls.Add(this.labelEmployees);
+            this.updateVendorPanel.Controls.Add(this.labelWebsite);
+            this.updateVendorPanel.Controls.Add(this.labelCompanyName);
+            this.updateVendorPanel.Controls.Add(this.labelRefNo);
+            resources.ApplyResources(this.updateVendorPanel, "updateVendorPanel");
+            this.updateVendorPanel.Name = "updateVendorPanel";
+            // 
+            // btnGoBackToAddingVendor
+            // 
+            this.btnGoBackToAddingVendor.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.btnGoBackToAddingVendor, "btnGoBackToAddingVendor");
+            this.btnGoBackToAddingVendor.ForeColor = System.Drawing.Color.White;
+            this.btnGoBackToAddingVendor.Name = "btnGoBackToAddingVendor";
+            this.btnGoBackToAddingVendor.UseVisualStyleBackColor = false;
+            this.btnGoBackToAddingVendor.Click += new System.EventHandler(this.btnGoBackToAddingVendor_Click);
+            // 
+            // updateBtn
+            // 
+            this.updateBtn.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.updateBtn, "updateBtn");
+            this.updateBtn.ForeColor = System.Drawing.Color.White;
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.UseVisualStyleBackColor = false;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
+            // 
+            // estTextBox
+            // 
+            resources.ApplyResources(this.estTextBox, "estTextBox");
+            this.estTextBox.Name = "estTextBox";
+            // 
+            // empTextBox
+            // 
+            resources.ApplyResources(this.empTextBox, "empTextBox");
+            this.empTextBox.Name = "empTextBox";
+            // 
+            // webTextBox
+            // 
+            resources.ApplyResources(this.webTextBox, "webTextBox");
+            this.webTextBox.Name = "webTextBox";
+            // 
+            // comTextBox
+            // 
+            resources.ApplyResources(this.comTextBox, "comTextBox");
+            this.comTextBox.Name = "comTextBox";
+            // 
+            // updateRefNoTextBox
+            // 
+            resources.ApplyResources(this.updateRefNoTextBox, "updateRefNoTextBox");
+            this.updateRefNoTextBox.Name = "updateRefNoTextBox";
+            // 
+            // labelEstablish
+            // 
+            resources.ApplyResources(this.labelEstablish, "labelEstablish");
+            this.labelEstablish.Name = "labelEstablish";
+            // 
+            // labelEmployees
+            // 
+            resources.ApplyResources(this.labelEmployees, "labelEmployees");
+            this.labelEmployees.Name = "labelEmployees";
+            // 
+            // labelWebsite
+            // 
+            resources.ApplyResources(this.labelWebsite, "labelWebsite");
+            this.labelWebsite.Name = "labelWebsite";
+            // 
+            // labelCompanyName
+            // 
+            resources.ApplyResources(this.labelCompanyName, "labelCompanyName");
+            this.labelCompanyName.Name = "labelCompanyName";
+            // 
+            // labelRefNo
+            // 
+            resources.ApplyResources(this.labelRefNo, "labelRefNo");
+            this.labelRefNo.Name = "labelRefNo";
             // 
             // addVendorPanel
             // 
-            this.addVendorPanel.Controls.Add(this.establishedDateTextBox);
-            this.addVendorPanel.Controls.Add(this.label15);
-            this.addVendorPanel.Controls.Add(this.numEployeesTextBox);
-            this.addVendorPanel.Controls.Add(this.label9);
-            this.addVendorPanel.Controls.Add(this.label14);
             this.addVendorPanel.Controls.Add(this.btnAddVendor);
             this.addVendorPanel.Controls.Add(this.websiteTextBox);
             this.addVendorPanel.Controls.Add(this.companyNameTextBox);
-            this.addVendorPanel.Controls.Add(this.label13);
-            this.addVendorPanel.Controls.Add(this.label12);
             this.addVendorPanel.Controls.Add(this.BtnShowVendors);
+            this.addVendorPanel.Controls.Add(this.establishedDateTextBox);
+            this.addVendorPanel.Controls.Add(this.numEployeesTextBox);
+            this.addVendorPanel.Controls.Add(this.label14);
+            this.addVendorPanel.Controls.Add(this.label12);
+            this.addVendorPanel.Controls.Add(this.label9);
+            this.addVendorPanel.Controls.Add(this.label13);
+            this.addVendorPanel.Controls.Add(this.label15);
             resources.ApplyResources(this.addVendorPanel, "addVendorPanel");
             this.addVendorPanel.Name = "addVendorPanel";
-            // 
-            // establishedDateTextBox
-            // 
-            resources.ApplyResources(this.establishedDateTextBox, "establishedDateTextBox");
-            this.establishedDateTextBox.Name = "establishedDateTextBox";
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            // 
-            // numEployeesTextBox
-            // 
-            resources.ApplyResources(this.numEployeesTextBox, "numEployeesTextBox");
-            this.numEployeesTextBox.Name = "numEployeesTextBox";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // label14
-            // 
-            resources.ApplyResources(this.label14, "label14");
-            this.label14.Name = "label14";
             // 
             // btnAddVendor
             // 
@@ -748,16 +872,6 @@ namespace FinancialServiceApplication
             resources.ApplyResources(this.companyNameTextBox, "companyNameTextBox");
             this.companyNameTextBox.Name = "companyNameTextBox";
             // 
-            // label13
-            // 
-            resources.ApplyResources(this.label13, "label13");
-            this.label13.Name = "label13";
-            // 
-            // label12
-            // 
-            resources.ApplyResources(this.label12, "label12");
-            this.label12.Name = "label12";
-            // 
             // BtnShowVendors
             // 
             this.BtnShowVendors.BackColor = System.Drawing.Color.DarkGreen;
@@ -767,14 +881,61 @@ namespace FinancialServiceApplication
             this.BtnShowVendors.UseVisualStyleBackColor = false;
             this.BtnShowVendors.Click += new System.EventHandler(this.BtnShowVendors_Click);
             // 
-            // BtnShowHomePage
+            // establishedDateTextBox
             // 
-            this.BtnShowHomePage.BackColor = System.Drawing.Color.DarkGreen;
-            resources.ApplyResources(this.BtnShowHomePage, "BtnShowHomePage");
-            this.BtnShowHomePage.ForeColor = System.Drawing.Color.White;
-            this.BtnShowHomePage.Name = "BtnShowHomePage";
-            this.BtnShowHomePage.UseVisualStyleBackColor = false;
-            this.BtnShowHomePage.Click += new System.EventHandler(this.BtnShowHomePage_Click);
+            resources.ApplyResources(this.establishedDateTextBox, "establishedDateTextBox");
+            this.establishedDateTextBox.Name = "establishedDateTextBox";
+            // 
+            // numEployeesTextBox
+            // 
+            resources.ApplyResources(this.numEployeesTextBox, "numEployeesTextBox");
+            this.numEployeesTextBox.Name = "numEployeesTextBox";
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Name = "label13";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // vendorDisplay
+            // 
+            this.vendorDisplay.Controls.Add(this.BtnGoToDeleteVendorPanel);
+            this.vendorDisplay.Controls.Add(this.BtnUpdatePage);
+            this.vendorDisplay.Controls.Add(this.BtnShowVendorPage);
+            this.vendorDisplay.Controls.Add(this.BtnShowHomePage);
+            this.vendorDisplay.Controls.Add(this.label10);
+            this.vendorDisplay.Controls.Add(this.displayVendorInGridView);
+            resources.ApplyResources(this.vendorDisplay, "vendorDisplay");
+            this.vendorDisplay.Name = "vendorDisplay";
+            this.vendorDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.vendorDisplay_Paint);
+            // 
+            // BtnUpdatePage
+            // 
+            this.BtnUpdatePage.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.BtnUpdatePage, "BtnUpdatePage");
+            this.BtnUpdatePage.ForeColor = System.Drawing.Color.White;
+            this.BtnUpdatePage.Name = "BtnUpdatePage";
+            this.BtnUpdatePage.UseVisualStyleBackColor = false;
+            this.BtnUpdatePage.Click += new System.EventHandler(this.BtnUpdatePage_Click);
             // 
             // BtnShowVendorPage
             // 
@@ -784,6 +945,15 @@ namespace FinancialServiceApplication
             this.BtnShowVendorPage.Name = "BtnShowVendorPage";
             this.BtnShowVendorPage.UseVisualStyleBackColor = false;
             this.BtnShowVendorPage.Click += new System.EventHandler(this.BtnShowVendorPage_Click);
+            // 
+            // BtnShowHomePage
+            // 
+            this.BtnShowHomePage.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.BtnShowHomePage, "BtnShowHomePage");
+            this.BtnShowHomePage.ForeColor = System.Drawing.Color.White;
+            this.BtnShowHomePage.Name = "BtnShowHomePage";
+            this.BtnShowHomePage.UseVisualStyleBackColor = false;
+            this.BtnShowHomePage.Click += new System.EventHandler(this.BtnShowHomePage_Click);
             // 
             // label10
             // 
@@ -803,16 +973,212 @@ namespace FinancialServiceApplication
             // 
             resources.ApplyResources(this.softwarePage, "softwarePage");
             this.softwarePage.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.softwarePage.Controls.Add(this.addSoftwarePanel);
             this.softwarePage.Controls.Add(this.displaySoftwarePanel);
+            this.softwarePage.Controls.Add(this.softwareUpdatePanel);
+            this.softwarePage.Controls.Add(this.addSoftwarePanel);
+            this.softwarePage.Controls.Add(this.deleteSoftwarePanel);
             this.softwarePage.Name = "softwarePage";
+            // 
+            // deleteSoftwarePanel
+            // 
+            this.deleteSoftwarePanel.Controls.Add(this.btnDeleteSoftwareFromDatabase);
+            this.deleteSoftwarePanel.Controls.Add(this.label3);
+            this.deleteSoftwarePanel.Controls.Add(this.button4);
+            this.deleteSoftwarePanel.Controls.Add(this.label17);
+            this.deleteSoftwarePanel.Controls.Add(this.deleteSoftwareUsingSoftID);
+            resources.ApplyResources(this.deleteSoftwarePanel, "deleteSoftwarePanel");
+            this.deleteSoftwarePanel.Name = "deleteSoftwarePanel";
+            // 
+            // btnDeleteSoftwareFromDatabase
+            // 
+            this.btnDeleteSoftwareFromDatabase.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.btnDeleteSoftwareFromDatabase, "btnDeleteSoftwareFromDatabase");
+            this.btnDeleteSoftwareFromDatabase.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteSoftwareFromDatabase.Name = "btnDeleteSoftwareFromDatabase";
+            this.btnDeleteSoftwareFromDatabase.UseVisualStyleBackColor = false;
+            this.btnDeleteSoftwareFromDatabase.Click += new System.EventHandler(this.btnDeleteSoftwareFromDatabase_Click_1);
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.button4, "button4");
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Name = "button4";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
+            // deleteSoftwareUsingSoftID
+            // 
+            resources.ApplyResources(this.deleteSoftwareUsingSoftID, "deleteSoftwareUsingSoftID");
+            this.deleteSoftwareUsingSoftID.Name = "deleteSoftwareUsingSoftID";
+            // 
+            // displaySoftwarePanel
+            // 
+            this.displaySoftwarePanel.Controls.Add(this.BtnGoToDeleteSoftware);
+            this.displaySoftwarePanel.Controls.Add(this.label24);
+            this.displaySoftwarePanel.Controls.Add(this.dataGridView2);
+            this.displaySoftwarePanel.Controls.Add(this.BtnGoBackToHomePage);
+            this.displaySoftwarePanel.Controls.Add(this.updateSoft);
+            this.displaySoftwarePanel.Controls.Add(this.BtnSoftwareAddPage);
+            this.displaySoftwarePanel.Controls.Add(this.btnAddSoft);
+            resources.ApplyResources(this.displaySoftwarePanel, "displaySoftwarePanel");
+            this.displaySoftwarePanel.Name = "displaySoftwarePanel";
+            this.displaySoftwarePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.displaySoftwarePanel_Paint);
+            // 
+            // BtnGoToDeleteSoftware
+            // 
+            this.BtnGoToDeleteSoftware.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.BtnGoToDeleteSoftware, "BtnGoToDeleteSoftware");
+            this.BtnGoToDeleteSoftware.ForeColor = System.Drawing.Color.White;
+            this.BtnGoToDeleteSoftware.Name = "BtnGoToDeleteSoftware";
+            this.BtnGoToDeleteSoftware.UseVisualStyleBackColor = false;
+            this.BtnGoToDeleteSoftware.Click += new System.EventHandler(this.BtnGoToDeleteSoftware_Click);
+            // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.BackColor = System.Drawing.Color.DarkGreen;
+            this.label24.ForeColor = System.Drawing.Color.White;
+            this.label24.Name = "label24";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToOrderColumns = true;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.dataGridView2, "dataGridView2");
+            this.dataGridView2.Name = "dataGridView2";
+            // 
+            // BtnGoBackToHomePage
+            // 
+            this.BtnGoBackToHomePage.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.BtnGoBackToHomePage, "BtnGoBackToHomePage");
+            this.BtnGoBackToHomePage.ForeColor = System.Drawing.Color.White;
+            this.BtnGoBackToHomePage.Name = "BtnGoBackToHomePage";
+            this.BtnGoBackToHomePage.UseVisualStyleBackColor = false;
+            this.BtnGoBackToHomePage.Click += new System.EventHandler(this.BtnGoBackToHomePage_Click);
+            // 
+            // updateSoft
+            // 
+            this.updateSoft.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.updateSoft, "updateSoft");
+            this.updateSoft.ForeColor = System.Drawing.Color.White;
+            this.updateSoft.Name = "updateSoft";
+            this.updateSoft.UseVisualStyleBackColor = false;
+            this.updateSoft.Click += new System.EventHandler(this.updateSoft_Click);
+            // 
+            // BtnSoftwareAddPage
+            // 
+            this.BtnSoftwareAddPage.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.BtnSoftwareAddPage, "BtnSoftwareAddPage");
+            this.BtnSoftwareAddPage.ForeColor = System.Drawing.Color.White;
+            this.BtnSoftwareAddPage.Name = "BtnSoftwareAddPage";
+            this.BtnSoftwareAddPage.UseVisualStyleBackColor = false;
+            // 
+            // btnAddSoft
+            // 
+            this.btnAddSoft.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.btnAddSoft, "btnAddSoft");
+            this.btnAddSoft.ForeColor = System.Drawing.Color.White;
+            this.btnAddSoft.Name = "btnAddSoft";
+            this.btnAddSoft.UseVisualStyleBackColor = false;
+            this.btnAddSoft.Click += new System.EventHandler(this.btnAddSoft_Click);
+            // 
+            // softwareUpdatePanel
+            // 
+            this.softwareUpdatePanel.Controls.Add(this.label16);
+            this.softwareUpdatePanel.Controls.Add(this.btnBacToAddingSoftware);
+            this.softwareUpdatePanel.Controls.Add(this.label25);
+            this.softwareUpdatePanel.Controls.Add(this.softIDTextBox);
+            this.softwareUpdatePanel.Controls.Add(this.updateSoftware);
+            this.softwareUpdatePanel.Controls.Add(this.updateBrowse);
+            this.softwareUpdatePanel.Controls.Add(this.updateSoftDescTextBox);
+            this.softwareUpdatePanel.Controls.Add(this.updateSoftNameTextBox);
+            this.softwareUpdatePanel.Controls.Add(this.filePath);
+            this.softwareUpdatePanel.Controls.Add(this.label19);
+            this.softwareUpdatePanel.Controls.Add(this.label18);
+            resources.ApplyResources(this.softwareUpdatePanel, "softwareUpdatePanel");
+            this.softwareUpdatePanel.Name = "softwareUpdatePanel";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // btnBacToAddingSoftware
+            // 
+            this.btnBacToAddingSoftware.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.btnBacToAddingSoftware, "btnBacToAddingSoftware");
+            this.btnBacToAddingSoftware.ForeColor = System.Drawing.Color.White;
+            this.btnBacToAddingSoftware.Name = "btnBacToAddingSoftware";
+            this.btnBacToAddingSoftware.UseVisualStyleBackColor = false;
+            this.btnBacToAddingSoftware.Click += new System.EventHandler(this.btnBacToAddingSoftware_Click);
+            // 
+            // label25
+            // 
+            resources.ApplyResources(this.label25, "label25");
+            this.label25.Name = "label25";
+            // 
+            // softIDTextBox
+            // 
+            resources.ApplyResources(this.softIDTextBox, "softIDTextBox");
+            this.softIDTextBox.Name = "softIDTextBox";
+            // 
+            // updateSoftware
+            // 
+            this.updateSoftware.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.updateSoftware, "updateSoftware");
+            this.updateSoftware.ForeColor = System.Drawing.Color.White;
+            this.updateSoftware.Name = "updateSoftware";
+            this.updateSoftware.UseVisualStyleBackColor = false;
+            this.updateSoftware.Click += new System.EventHandler(this.updateSoftware_Click);
+            // 
+            // updateBrowse
+            // 
+            this.updateBrowse.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.updateBrowse, "updateBrowse");
+            this.updateBrowse.ForeColor = System.Drawing.Color.White;
+            this.updateBrowse.Name = "updateBrowse";
+            this.updateBrowse.UseVisualStyleBackColor = false;
+            this.updateBrowse.Click += new System.EventHandler(this.updateBrowse_Click);
+            // 
+            // updateSoftDescTextBox
+            // 
+            resources.ApplyResources(this.updateSoftDescTextBox, "updateSoftDescTextBox");
+            this.updateSoftDescTextBox.Name = "updateSoftDescTextBox";
+            // 
+            // updateSoftNameTextBox
+            // 
+            resources.ApplyResources(this.updateSoftNameTextBox, "updateSoftNameTextBox");
+            this.updateSoftNameTextBox.Name = "updateSoftNameTextBox";
+            // 
+            // filePath
+            // 
+            resources.ApplyResources(this.filePath, "filePath");
+            this.filePath.Name = "filePath";
+            this.filePath.Click += new System.EventHandler(this.filePath_Click);
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
             // 
             // addSoftwarePanel
             // 
-            this.addSoftwarePanel.Controls.Add(this.button3);
-            this.addSoftwarePanel.Controls.Add(this.BtnUploadFile);
-            this.addSoftwarePanel.Controls.Add(this.label16);
-            this.addSoftwarePanel.Controls.Add(this.ref_no_TextBox);
             this.addSoftwarePanel.Controls.Add(this.button2);
             this.addSoftwarePanel.Controls.Add(this.softwareDescriptionTextBox);
             this.addSoftwarePanel.Controls.Add(this.softwareNameTextBox);
@@ -820,39 +1186,11 @@ namespace FinancialServiceApplication
             this.addSoftwarePanel.Controls.Add(this.label22);
             this.addSoftwarePanel.Controls.Add(this.label23);
             this.addSoftwarePanel.Controls.Add(this.btnAddSoftware);
+            this.addSoftwarePanel.Controls.Add(this.pathFile);
+            this.addSoftwarePanel.Controls.Add(this.button3);
             resources.ApplyResources(this.addSoftwarePanel, "addSoftwarePanel");
             this.addSoftwarePanel.Name = "addSoftwarePanel";
             this.addSoftwarePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.addSoftwarePanel_Paint);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.DarkGreen;
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Name = "button3";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // BtnUploadFile
-            // 
-            this.BtnUploadFile.BackColor = System.Drawing.Color.DarkGreen;
-            resources.ApplyResources(this.BtnUploadFile, "BtnUploadFile");
-            this.BtnUploadFile.ForeColor = System.Drawing.Color.White;
-            this.BtnUploadFile.Name = "BtnUploadFile";
-            this.BtnUploadFile.UseVisualStyleBackColor = false;
-            this.BtnUploadFile.Click += new System.EventHandler(this.BtnUploadFile_Click);
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.BackColor = System.Drawing.Color.DarkGreen;
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Name = "label16";
-            // 
-            // ref_no_TextBox
-            // 
-            resources.ApplyResources(this.ref_no_TextBox, "ref_no_TextBox");
-            this.ref_no_TextBox.Name = "ref_no_TextBox";
             // 
             // button2
             // 
@@ -901,67 +1239,21 @@ namespace FinancialServiceApplication
             this.btnAddSoftware.ForeColor = System.Drawing.Color.White;
             this.btnAddSoftware.Name = "btnAddSoftware";
             this.btnAddSoftware.UseVisualStyleBackColor = false;
-            this.btnAddSoftware.Click += new System.EventHandler(this.button3_Click);
+            this.btnAddSoftware.Click += new System.EventHandler(this.btnAddSoftwareToDatabase_Click);
             // 
-            // displaySoftwarePanel
+            // pathFile
             // 
-            this.displaySoftwarePanel.Controls.Add(this.btnAddSoft);
-            this.displaySoftwarePanel.Controls.Add(this.dataGridView2);
-            this.displaySoftwarePanel.Controls.Add(this.button4);
-            this.displaySoftwarePanel.Controls.Add(this.BtnSoftwareAddPage);
-            this.displaySoftwarePanel.Controls.Add(this.label24);
-            this.displaySoftwarePanel.Controls.Add(this.BtnGoBackToHomePage);
-            resources.ApplyResources(this.displaySoftwarePanel, "displaySoftwarePanel");
-            this.displaySoftwarePanel.Name = "displaySoftwarePanel";
-            this.displaySoftwarePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.displaySoftwarePanel_Paint);
+            resources.ApplyResources(this.pathFile, "pathFile");
+            this.pathFile.Name = "pathFile";
             // 
-            // btnAddSoft
+            // button3
             // 
-            this.btnAddSoft.BackColor = System.Drawing.Color.DarkGreen;
-            resources.ApplyResources(this.btnAddSoft, "btnAddSoft");
-            this.btnAddSoft.ForeColor = System.Drawing.Color.White;
-            this.btnAddSoft.Name = "btnAddSoft";
-            this.btnAddSoft.UseVisualStyleBackColor = false;
-            this.btnAddSoft.Click += new System.EventHandler(this.btnAddSoft_Click);
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToOrderColumns = true;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resources.ApplyResources(this.dataGridView2, "dataGridView2");
-            this.dataGridView2.Name = "dataGridView2";
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.DarkGreen;
-            resources.ApplyResources(this.button4, "button4");
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Name = "button4";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // BtnSoftwareAddPage
-            // 
-            this.BtnSoftwareAddPage.BackColor = System.Drawing.Color.DarkGreen;
-            resources.ApplyResources(this.BtnSoftwareAddPage, "BtnSoftwareAddPage");
-            this.BtnSoftwareAddPage.ForeColor = System.Drawing.Color.White;
-            this.BtnSoftwareAddPage.Name = "BtnSoftwareAddPage";
-            this.BtnSoftwareAddPage.UseVisualStyleBackColor = false;
-            // 
-            // label24
-            // 
-            resources.ApplyResources(this.label24, "label24");
-            this.label24.BackColor = System.Drawing.Color.DarkGreen;
-            this.label24.ForeColor = System.Drawing.Color.White;
-            this.label24.Name = "label24";
-            // 
-            // BtnGoBackToHomePage
-            // 
-            this.BtnGoBackToHomePage.BackColor = System.Drawing.Color.DarkGreen;
-            resources.ApplyResources(this.BtnGoBackToHomePage, "BtnGoBackToHomePage");
-            this.BtnGoBackToHomePage.ForeColor = System.Drawing.Color.White;
-            this.BtnGoBackToHomePage.Name = "BtnGoBackToHomePage";
-            this.BtnGoBackToHomePage.UseVisualStyleBackColor = false;
-            this.BtnGoBackToHomePage.Click += new System.EventHandler(this.BtnGoBackToHomePage_Click);
+            this.button3.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.button3, "button3");
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Name = "button3";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // openFileDialog1
             // 
@@ -971,17 +1263,30 @@ namespace FinancialServiceApplication
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
             // 
+            // openFileDialog3
+            // 
+            this.openFileDialog3.FileName = "openFileDialog3";
+            // 
+            // BtnGoToDeleteVendorPanel
+            // 
+            this.BtnGoToDeleteVendorPanel.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.BtnGoToDeleteVendorPanel, "BtnGoToDeleteVendorPanel");
+            this.BtnGoToDeleteVendorPanel.ForeColor = System.Drawing.Color.White;
+            this.BtnGoToDeleteVendorPanel.Name = "BtnGoToDeleteVendorPanel";
+            this.BtnGoToDeleteVendorPanel.UseVisualStyleBackColor = false;
+            this.BtnGoToDeleteVendorPanel.Click += new System.EventHandler(this.BtnGoToDeleteVendorPanel_Click);
+            // 
             // application
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.header);
+            this.Controls.Add(this.softwarePage);
+            this.Controls.Add(this.logInPage);
             this.Controls.Add(this.homePage);
             this.Controls.Add(this.aboutUs);
             this.Controls.Add(this.vendorPage);
             this.Controls.Add(this.signUpPage);
-            this.Controls.Add(this.softwarePage);
-            this.Controls.Add(this.logInPage);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.Name = "application";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -1011,18 +1316,25 @@ namespace FinancialServiceApplication
             this.signUpForm.ResumeLayout(false);
             this.signUpForm.PerformLayout();
             this.vendorPage.ResumeLayout(false);
-            this.vendorPage.PerformLayout();
-            this.vendorDisplay.ResumeLayout(false);
-            this.vendorDisplay.PerformLayout();
+            this.deleteVendorPanel.ResumeLayout(false);
+            this.deleteVendorPanel.PerformLayout();
+            this.updateVendorPanel.ResumeLayout(false);
+            this.updateVendorPanel.PerformLayout();
             this.addVendorPanel.ResumeLayout(false);
             this.addVendorPanel.PerformLayout();
+            this.vendorDisplay.ResumeLayout(false);
+            this.vendorDisplay.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.displayVendorInGridView)).EndInit();
             this.softwarePage.ResumeLayout(false);
-            this.addSoftwarePanel.ResumeLayout(false);
-            this.addSoftwarePanel.PerformLayout();
+            this.deleteSoftwarePanel.ResumeLayout(false);
+            this.deleteSoftwarePanel.PerformLayout();
             this.displaySoftwarePanel.ResumeLayout(false);
             this.displaySoftwarePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.softwareUpdatePanel.ResumeLayout(false);
+            this.softwareUpdatePanel.PerformLayout();
+            this.addSoftwarePanel.ResumeLayout(false);
+            this.addSoftwarePanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1049,7 +1361,6 @@ namespace FinancialServiceApplication
         private Button softwareButton;
         private Button vendorButton;
         private Panel vendorPage;
-        private Label label3;
         private Panel softwarePage;
         private Label CitiSoft3;
         private Panel logInForm;
@@ -1127,17 +1438,55 @@ namespace FinancialServiceApplication
         private Button btnAddSoftware;
         private Panel displaySoftwarePanel;
         private DataGridView dataGridView2;
-        private Button button4;
+        private Button updateSoft;
         private Button BtnSoftwareAddPage;
         private Label label24;
         private Button BtnGoBackToHomePage;
         private Button btnAddSoft;
-        private Button BtnUploadFile;
-        private Label label16;
-        private TextBox ref_no_TextBox;
         private Button button3;
         private OpenFileDialog openFileDialog1;
         private OpenFileDialog openFileDialog2;
+        private Button BtnUpdatePage;
+        private OpenFileDialog openFileDialog3;
+        private Label pathFile;
+        private Panel softwareUpdatePanel;
+        private Button updateSoftware;
+        private Button updateBrowse;
+        private TextBox updateSoftDescTextBox;
+        private TextBox updateSoftNameTextBox;
+        private Label filePath;
+        private Label label19;
+        private Label label18;
+        private Label label25;
+        private TextBox softIDTextBox;
+        private Button btnBacToAddingSoftware;
+        private Panel updateVendorPanel;
+        private Label labelRefNo;
+        private Label labelCompanyName;
+        private Label labelWebsite;
+        private Label labelEmployees;
+        private Label labelEstablish;
+        private TextBox updateRefNoTextBox;
+        private TextBox comTextBox;
+        private TextBox webTextBox;
+        private TextBox empTextBox;
+        private TextBox estTextBox;
+        private Button updateBtn;
+        private Button btnGoBackToAddingVendor;
+        private Label label16;
+        private Panel deleteSoftwarePanel;
+        private Button btnDeleteSoftwareFromDatabase;
+        private Label label3;
+        private Button button4;
+        private Label label17;
+        private TextBox deleteSoftwareUsingSoftID;
+        private Button BtnGoToDeleteSoftware;
+        private Panel deleteVendorPanel;
+        private Button fromDeleteVendorToVendorDisplay;
+        private TextBox deleteVendorUsinRefNo;
+        private Label label29;
+        private Button deleteVendorBtn;
+        private Button BtnGoToDeleteVendorPanel;
     }
 }
 

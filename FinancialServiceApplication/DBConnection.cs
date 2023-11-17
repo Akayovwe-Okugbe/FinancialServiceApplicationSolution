@@ -147,7 +147,7 @@ namespace FinancialServiceApplication
 
             return false;
         }
-        
+
         //
         //
         //
@@ -158,7 +158,7 @@ namespace FinancialServiceApplication
         //
         //
 
-        public void AddVendorToDatabase(string sqlQuery, string company_name, string company_website, string established_date, string no_of_employees)
+        public void AddVendorToDatabase(string sqlQuery, string company_name = null, string company_website = null, string established_date = null, string no_of_employees = null)
         {
 
             using (SqlConnection connectToDB = new SqlConnection(connectionString))
@@ -166,52 +166,73 @@ namespace FinancialServiceApplication
 
                 //open connection
                 connectToDB.Open();
-                SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB);
+                using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB))
+                {
+                    if (company_name != null)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@company_name", company_name);
+                    }
+                    if (company_website != null)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@company_website", company_website);
 
-                //set the sqlCommand's properties
-                sqlCommand.CommandType = CommandType.Text;
-
-                sqlCommand.Parameters.AddWithValue("@company_name", company_name);
-                sqlCommand.Parameters.AddWithValue("@company_website", company_website);
-                sqlCommand.Parameters.AddWithValue("@company_established", established_date);
-                sqlCommand.Parameters.AddWithValue("@no_of_employees", no_of_employees);
-
-                //execute the command
-                sqlCommand.ExecuteNonQuery();
-
-                MessageBox.Show("NEW VENDOR ADDED", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    }
+                    if (established_date != null)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@company_established", established_date);
+                    }
+                    if (no_of_employees != null)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@no_of_employees", no_of_employees);
+                    }
+                    //execute the command
+                    sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                }
                 // Close the connection
                 connectToDB.Close();
-
             }
-
         }
-
-        public void AddSoftwareToDatabase(string sqlQuery, string software_name, int ref_no, string description)
+           
+        public void AddSoftwareToDatabase(string sqlQuery, string software_name = null, string description = null, string document_to_attach = null)
         {
             using (SqlConnection connectToDB = new SqlConnection(connectionString))
             {
                 // Open connection
                 connectToDB.Open();
-                SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB);
 
-                // Set the sqlCommand's properties
-                sqlCommand.CommandType = CommandType.Text;
+                using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB))
+                {
+                    // Set the sqlCommand's properties
 
-                sqlCommand.Parameters.AddWithValue("@software_name", software_name);
-                sqlCommand.Parameters.AddWithValue("@ref_no", ref_no);
-                sqlCommand.Parameters.AddWithValue("@description", description);
+                    if (software_name != null)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@software_name", software_name);
+                    }
 
-                // Execute the command
-                sqlCommand.ExecuteNonQuery();
+                    if (description != null)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@description", description);
+                    }
 
-                MessageBox.Show("NEW SOFTWARE ADDED", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (document_to_attach != null)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@document_to_attach", document_to_attach);
+                    }
+
+                    // sqlCommand.Parameters.AddWithValue("@ref_no", ref_no);
+
+                    // Execute the command
+                    sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
                 // Close the connection
                 connectToDB.Close();
             }
         }
+
 
 
         public DataSet LoadVendors(string sqlQuery)
@@ -264,23 +285,40 @@ namespace FinancialServiceApplication
             }
         }
 
-        private void SaveFileToDatabase(string fileName, byte[] fileData)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
+      
+          
 
-                string sqlQuery = "INSERT INTO YourTable (FileName, FileData) VALUES (@FileName, @FileData)";
-                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
-                {
-                    cmd.Parameters.AddWithValue("@FileName", fileName);
-                    cmd.Parameters.AddWithValue("@FileData", fileData);
 
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
 
+        /* public static byte[] RetrieveFileDataFromDatabase(int softwareId)
+         {
+             byte[] fileData = null;
+
+             using (SqlConnection connection = new SqlConnection("your_connection_string"))
+             {
+                 connection.Open();
+
+                 // Adjust the SQL query to match your schema
+                 string query = "SELECT document_to_attach FROM YourTable WHERE software_id = @softwareId";
+
+                 using (SqlCommand command = new SqlCommand(query, connection))
+                 {
+                     command.Parameters.AddWithValue("@softwareId", softwareId);
+
+                     using (SqlDataReader reader = command.ExecuteReader())
+                     {
+                         if (reader.Read())
+                         {
+                             // Assuming the file data is stored as a byte array
+                             fileData = (byte[])reader["document_to_attach"];
+                         }
+                     }
+                 }
+             }
+
+             return fileData;
+         }
+        */
 
 
 
