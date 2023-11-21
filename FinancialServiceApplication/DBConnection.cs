@@ -26,6 +26,8 @@ namespace FinancialServiceApplication
         //the connection string
         private string connectionString;
 
+        ArrayList parameterList = new ArrayList();
+
         //connnection to the database
         private SqlConnection connectToDB;
 
@@ -64,36 +66,39 @@ namespace FinancialServiceApplication
         //
         //
         //
-
-        public void saveToDatabase(string sqlQuery, ArrayList parameters)
+        public void saveToDatabase(string sqlQuery, ArrayList parameters, string role)
         {
-
-            using (SqlConnection connectToDB = new SqlConnection(connectionString))
+            try
             {
-
-                //open connection
-                connectToDB.Open();
-                SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB);
-
-                //set the sqlCommand's properties
-                sqlCommand.CommandType = CommandType.Text;
-
-                foreach (SqlParameter parameter in parameters)
+                using (SqlConnection connectToDB = new SqlConnection(connectionString))
                 {
-                    sqlCommand.Parameters.Add(parameter);
+                    connectToDB.Open();
+                    SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB);
+                    sqlCommand.CommandType = CommandType.Text;
+
+                    // Add other parameters
+                    foreach (SqlParameter parameter in parameters)
+                    {
+                        sqlCommand.Parameters.Add(parameter);
+                    }
+
+                    // Check if the query contains a parameter for role before adding it
+                    if (sqlQuery.Contains("@role"))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@role", role);
+                    }
+
+                    sqlCommand.ExecuteNonQuery();
+                    Console.WriteLine("Success.");
                 }
-
-                //execute the command
-                sqlCommand.ExecuteNonQuery();
-
-                MessageBox.Show("YOU HAVE SUCCESSFULLY JOINED THE COMMUNITY", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Close the connection
-                connectToDB.Close();
-
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                // You can also throw the exception or handle it in a way that suits your application
+            }
         }
+
 
         // This code retrieves the hashed password specified to the inputed email fron the database
         // It returns the password as a string else it returns null
@@ -119,7 +124,7 @@ namespace FinancialServiceApplication
                     {
                         string firstname = reader["firstname"].ToString();
                         string hashedPassword = reader["password"].ToString();
-                        string role = reader["role"].ToString();
+                        //string role = reader["role"].ToString();
 
                         // Application.DisplayGreeting(firstname, role);
 
@@ -134,7 +139,7 @@ namespace FinancialServiceApplication
 
         }
 
-        public bool ValidateUser(string email, string password)
+        public bool ValidateUser(string email, string password, out string userRole)
         {
             string databaseHashedPassword = RetrieveUserPassword(SqlQueries.VALIDATE_LOGIN_DETAILS, email);
 
@@ -142,12 +147,45 @@ namespace FinancialServiceApplication
             {
                 bool passwordMatched = PasswordHasher.VerifyPassword(password, databaseHashedPassword);
 
-                return passwordMatched;
+                if (passwordMatched)
+                {
+                    // Retrieve the user's role after successful login
+                    userRole = RetrieveUserRole(email);
+                    return true;
+                }
             }
 
+            // If login fails or user not found, set userRole to a default value (or handle it based on your logic)
+            userRole = "Unknown";
             return false;
         }
 
+        public string RetrieveUserRole(string email)
+        {
+            using (SqlConnection connectToDB = new SqlConnection(connectionString))
+            {
+                connectToDB.Open();
+
+                // SQL query to retrieve the user role based on the email
+                string sqlQuery = "SELECT role FROM [USER] WHERE email = @email";
+
+                using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB))
+                {
+                    sqlCommand.Parameters.AddWithValue("@email", email);
+
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        return reader["role"].ToString();
+                    }
+
+                    // If the user is not found or the role is not available, return a default value or handle it appropriately
+                    return "Unknown"; // Change this to an appropriate default value or handle it based on your application logic
+                }
+            }
+        }
+       
         //
         //
         //
@@ -234,7 +272,6 @@ namespace FinancialServiceApplication
         }
 
 
-
         public DataSet LoadVendors(string sqlQuery)
         {
             try
@@ -259,7 +296,6 @@ namespace FinancialServiceApplication
                 throw;
             }
         }
-
         public DataSet LoadSoftware(string sqlQuery)
         {
             try
@@ -284,46 +320,7 @@ namespace FinancialServiceApplication
                 throw;
             }
         }
-
-      
-          
-
-
-
-        /* public static byte[] RetrieveFileDataFromDatabase(int softwareId)
-         {
-             byte[] fileData = null;
-
-             using (SqlConnection connection = new SqlConnection("your_connection_string"))
-             {
-                 connection.Open();
-
-                 // Adjust the SQL query to match your schema
-                 string query = "SELECT document_to_attach FROM YourTable WHERE software_id = @softwareId";
-
-                 using (SqlCommand command = new SqlCommand(query, connection))
-                 {
-                     command.Parameters.AddWithValue("@softwareId", softwareId);
-
-                     using (SqlDataReader reader = command.ExecuteReader())
-                     {
-                         if (reader.Read())
-                         {
-                             // Assuming the file data is stored as a byte array
-                             fileData = (byte[])reader["document_to_attach"];
-                         }
-                     }
-                 }
-             }
-
-             return fileData;
-         }
-        */
-
-
-
-
-        /*public DataSet LoadSoftware(string sqlQuery)
+        public DataSet LoadUsers(string sqlQuery)
         {
             try
             {
@@ -332,20 +329,25 @@ namespace FinancialServiceApplication
                 {
                     connectToDB.Open();
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, connectToDB);
-                    adapter.Fill(dataTable);
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, connectToDB))
+                    {
+                        adapter.Fill(dataTable);
+                    }
                 }
 
                 return dataTable;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
-                // Handle the exception or rethrow it, depending on your application's logic.
+                // Log the exception or handle it in a way appropriate for your application.
                 // For now, let's rethrow the exception:
                 throw;
             }
-        }*/
+        }
+
+
+
+
 
     }
 }

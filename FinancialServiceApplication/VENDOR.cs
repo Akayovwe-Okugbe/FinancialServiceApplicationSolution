@@ -16,12 +16,11 @@ namespace FinancialServiceApplication
 
             }
 
-        public static void eraseVendor(DBConnection dBConnection, SqlQueries query, int ref_no)
+
+        public static void eraseVendor(DBConnection dBConnection, SqlQueries query, int ref_no, string company_name, string company_website, string company_established, string no_of_employees)
         {
             dBConnection.AddVendorToDatabase(query.deleteVendor(ref_no));
-            //MessageBox.Show("SUCCESS");
-            
-
+            //MessageBox.Show("SUCCESS");         
         }
         
     }

@@ -25,11 +25,15 @@ namespace FinancialServiceApplication
         //
         DBConnection dbconnection = DBConnection.getInstanceOfDBConnection();
         SqlQueries sqlQueries = new SqlQueries();
+        
+
 
         public application()
         {
             InitializeComponent();
-
+            adminDataGridViewPanel.Visible = false;
+            deleteUserPanel.Visible = false;
+            updateUserRolePanel.Visible = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -66,7 +70,7 @@ namespace FinancialServiceApplication
                 !string.IsNullOrEmpty(emailBox.Text) && !string.IsNullOrEmpty(passwordBox.Text) &&
                 !string.IsNullOrEmpty(genderBox.Text) && !string.IsNullOrEmpty(mobileBox.Text) &&
                 !string.IsNullOrEmpty(addressBox.Text) && !string.IsNullOrEmpty(postcodeBox.Text) &&
-                !string.IsNullOrEmpty(countryBox.Text))
+                !string.IsNullOrEmpty(countryBox.Text) && (adminRadioButton.Checked || consultantRadioButton.Checked))
             {
                 // The signup button is displayed if the required fields are not null
                 signUpButton.Visible = true;
@@ -159,18 +163,19 @@ namespace FinancialServiceApplication
             logoutMenuItem.Visible = false;
             loginMenuItem.Visible = true;
             signupMenuItem.Visible = true;
+            adminDataGridViewPanel.Visible = false;
         }
 
         private void CompanyButton_Click(object sender, EventArgs e)
         {
             PanelVisibility(vendorPage, vendorDisplay);
-            deleteVendorPanel.Visible = false;
+           // deleteVendorPanel.Visible = false;
         }
 
         private void SoftwareButton_Click(object sender, EventArgs e)
         {
             PanelVisibility(softwarePage, displaySoftwarePanel);
-            deleteSoftwarePanel.Visible = false;               
+                          
         }
 
         //
@@ -218,32 +223,55 @@ namespace FinancialServiceApplication
 
         private void LogInButton_Click(object sender, EventArgs e)
         {
-            // Assign parameters to the text boxes
+            // Get the user's entered email and password
             string email = logInEmailBox.Text;
             string password = logInPasswordBox.Text;
 
-            //Save to the Database
-            bool userValidated = DBConnection.getInstanceOfDBConnection().ValidateUser(email, password);
-
-            if (userValidated)
+            // Validate the user and retrieve the role
+            if (DBConnection.getInstanceOfDBConnection().ValidateUser(email, password, out string userRole))
             {
-                MessageBox.Show("LOGIN SUCCESSFUL!", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // After successful login, display a complete home screen
-                PanelVisibility(header, footer, homePage);
-                vendorButton.Visible = true;
-                softwareButton.Visible = true;
-                searchText.Visible = true;
-                searchButton.Visible = true;
-                menuFunctions.Visible = true;
-                logoutMenuItem.Visible = true;
-                loginMenuItem.Visible = false;
-                signupMenuItem.Visible = false;
+                // Successful login
+                MessageBox.Show($"Login successful! User role: {userRole}");
+
+                // Now you can use the userRole information to determine actions or features available to the user
+                if (userRole == "Admin")
+                {
+                    // Do something specific for Admin
+                    PanelVisibility(header, footer, homePage);
+                    logoutMenuItem.Visible = true;
+                    loginMenuItem.Visible = false;
+                    //signupMenuItem.Visible = true;
+                    searchText.Visible = true;
+                    searchButton.Visible = true;
+                    menuFunctions.Visible = true;
+                    adminDataGridViewPanel.Visible = true;
+
+                }
+                else if (userRole == "Consultant")
+                {
+                    // Do something specific for Consultant
+                    PanelVisibility(header, footer, homePage);
+                    vendorButton.Visible = true;
+                    softwareButton.Visible = true;
+                    searchText.Visible = true;
+                    searchButton.Visible = true;
+                    menuFunctions.Visible = true;
+                    logoutMenuItem.Visible = true;
+                    loginMenuItem.Visible = false;
+                    signupMenuItem.Visible = false;
+                    adminDataGridViewPanel.Visible = false;
+                }
+
+                // ... (other actions after successful login)
             }
             else
             {
-                MessageBox.Show("INVALID CREDENTIALS. PLEASE CHECK LOGIN DETAILS!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Login failed
+                MessageBox.Show("Invalid email or password. Please try again.");
             }
         }
+
+
 
         //
         //
@@ -372,6 +400,16 @@ namespace FinancialServiceApplication
             CheckSignUpTextBoxes();
         }
 
+        private void adminRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckSignUpTextBoxes();
+        }
+
+        private void consultantRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckSignUpTextBoxes();
+        }
+
         private void SignUpPageGoBackButton_Click(object sender, EventArgs e)
         {
             menuFunctions.Visible = true;
@@ -383,7 +421,7 @@ namespace FinancialServiceApplication
             menuFunctions.Visible = false;
             PanelVisibility(logInPage);
         }
-
+        
         private void SignUpButton_Click(object sender, EventArgs e)
         {
             // Assign parameters to the text boxes
@@ -400,7 +438,15 @@ namespace FinancialServiceApplication
             string address = addressBox.Text;
             string postcode = postcodeBox.Text;
             string country = countryBox.Text;
-            string role = "NON-CONSULTANT";
+            string role = ""; //"NON-CONSULTANT";
+            if(adminRadioButton.Checked)
+            {
+                role = "Admin";
+            }
+            else if(consultantRadioButton.Checked)
+            {
+                role = "Consultant";
+            }
 
             //Add parameters to the Arraylist
             parameterList.Add(new SqlParameter("firstName", firstname));
@@ -412,21 +458,21 @@ namespace FinancialServiceApplication
             parameterList.Add(new SqlParameter("address", address));
             parameterList.Add(new SqlParameter("postcode", postcode));
             parameterList.Add(new SqlParameter("country", country));
-            parameterList.Add(new SqlParameter("role", role));
+            //parameterList.Add(new SqlParameter("role", role));
 
             //Save to the Database
-            DBConnection.getInstanceOfDBConnection().saveToDatabase(SqlQueries.SAVE_USER_TO_DATABASE, parameterList);
-
-            // After successful signup, display a complete home screen
+            DBConnection.getInstanceOfDBConnection().saveToDatabase(SqlQueries.SAVE_USER_TO_DATABASE, parameterList, role);
+            parameterList.Clear();
             PanelVisibility(header, footer, homePage);
-            vendorButton.Visible = true;
-            softwareButton.Visible = true;
-            searchText.Visible = true;
-            searchButton.Visible = true;
+            vendorButton.Visible = false;
+            softwareButton.Visible = false;
+            searchText.Visible = false;
+            searchButton.Visible = false;
             menuFunctions.Visible = true;
-            logoutMenuItem.Visible = true;
-            loginMenuItem.Visible = false;
-            signupMenuItem.Visible = false;
+            logoutMenuItem.Visible = false;
+            loginMenuItem.Visible = true;
+            signupMenuItem.Visible = true;
+            adminDataGridViewPanel.Visible = false;
         }
 
         //
@@ -444,7 +490,7 @@ namespace FinancialServiceApplication
         }
         private void BtnShowVendorPage_Click(object sender, EventArgs e)
         {
-            deleteVendorPanel.Visible = false;
+            
             vendorDisplay.Visible = false;
             addVendorPanel.Visible = true;
             updateVendorPanel.Visible = false;        
@@ -486,11 +532,14 @@ namespace FinancialServiceApplication
             // MessageBox.Show("UPDATE IS SUCCESSFUL");
             vendorDisplay.Visible = true;
         }
-        private void deleteVendorBtn_Click(object sender, EventArgs e)
+
+       
+        private void deleteUserFromDatabase_Click(object sender, EventArgs e)
         {
-            VENDOR.eraseVendor(dbconnection, sqlQueries, Convert.ToInt16(deleteVendorUsinRefNo.Text));
-            deleteVendorUsinRefNo.Text = "";
-            vendorDisplay.Visible = true;
+            admin.DeleteUser(dbconnection, sqlQueries, Convert.ToInt16(userIDTextBox.Text));
+            
+            userIDTextBox.Text = "";
+            adminDataGridViewPanel.Visible = true;
         }
 
         private void BtnShowVendors_Click(object sender, EventArgs e)
@@ -498,7 +547,7 @@ namespace FinancialServiceApplication
             vendorDisplay.Visible = true;
             addVendorPanel.Visible = false;
             updateVendorPanel.Visible =false;
-            deleteVendorPanel.Visible = false;
+            
         }
 
         private void BtnShowHomePage_Click(object sender, EventArgs e)
@@ -506,34 +555,14 @@ namespace FinancialServiceApplication
             menuFunctions.Visible = true;
             PanelVisibility(homePage, searchText);
         }     
-        private void fromDeleteVendorToVendorDisplay_Click(object sender, EventArgs e)
+       
+        private void btnGoBackToAddingVendor_Click(object sender, EventArgs e)
         {
-            deleteVendorPanel.Visible = false;
+           
             vendorDisplay.Visible = true;
             addVendorPanel.Visible = false;
             updateVendorPanel.Visible = false;
-        }
-        private void btnGoBackToAddingVendor_Click(object sender, EventArgs e)
-        {
-            deleteVendorPanel.Visible = false;
-            vendorDisplay.Visible = false;
-            addVendorPanel.Visible = true;
-            updateVendorPanel.Visible = false;
-        }
-        private void BtnUpdatePage_Click(object sender, EventArgs e)
-        {
-            updateVendorPanel.Visible = true;
-            vendorDisplay.Visible = false;
-            addVendorPanel.Visible = false;
-            deleteVendorPanel.Visible = false;
-        }
-        private void BtnGoToDeleteVendorPanel_Click(object sender, EventArgs e)
-        {
-            deleteVendorPanel.Visible = true;
-            vendorDisplay.Visible = false;
-            addVendorPanel.Visible = false;
-            updateVendorPanel.Visible = false;
-        }
+        }    
 
         private void vendorDisplay_Paint(object sender, PaintEventArgs e)
         {
@@ -577,36 +606,49 @@ namespace FinancialServiceApplication
         }
         private void updateSoftware_Click(object sender, EventArgs e)
         {
+            softIDTextBox.ReadOnly = true;
             try
             {
                 SOFTWARE.changeSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDescTextBox.Text, filePath.Text);
-                softIDTextBox.Text = "";
+                //softIDTextBox.Text = "";
                 updateSoftNameTextBox.Text = "";
                 updateSoftDescTextBox.Text = "";
                 filePath.Text = "";
-                MessageBox.Show("UPDATE IS SUCCESSFUL");
+                //MessageBox.Show("UPDATE IS SUCCESSFUL");
                 displaySoftwarePanel.Visible = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("ERROR OCCURED:{ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"ERROR OCCURRED: {ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
+
+        private void btnDeleteSoftwareFromDatabase_Click_1(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        { }
+                 
         private void btnAddSoft_Click(object sender, EventArgs e)
         {
-            deleteSoftwarePanel.Visible = false;
+            
             softwareUpdatePanel.Visible = false;
             displaySoftwarePanel.Visible = false;
             addSoftwarePanel.Visible = true;
         }
+        
         private void BtnGoBackToHomePage_Click(object sender, EventArgs e)
         {          
             menuFunctions.Visible = true;
             PanelVisibility(homePage, searchText);
         }
-        private void button2_Click(object sender, EventArgs e)
+
+        private void btnGoBackToDisplaySoftwarePanel_Click(object sender, EventArgs e)
         {
-            deleteSoftwarePanel.Visible = false;
+            
             displaySoftwarePanel.Visible = true;
             addSoftwarePanel.Visible = false;
             softwareUpdatePanel.Visible = false;
@@ -619,8 +661,9 @@ namespace FinancialServiceApplication
             DataSet getSoftware = dbconnection.LoadSoftware(sqlQueries.displaySoftware());
             dataGridView2.DataSource = getSoftware.Tables[0];
             
-        }       
-        private void button3_Click_1(object sender, EventArgs e)
+        }
+       
+        private void btnBrowseFile_Click_1(object sender, EventArgs e)
         {
             pathFile.Text = SOFTWARE.pdfAttach();
         }      
@@ -630,7 +673,7 @@ namespace FinancialServiceApplication
         }
         private void updateSoft_Click(object sender, EventArgs e)
         {           
-            deleteSoftwarePanel.Visible = false;
+            
             softwareUpdatePanel.Visible = true;
             displaySoftwarePanel.Visible = false;
             addSoftwarePanel.Visible = false;
@@ -640,7 +683,7 @@ namespace FinancialServiceApplication
 
         private void btnBacToAddingSoftware_Click(object sender, EventArgs e)
         {
-            deleteSoftwarePanel.Visible = false;
+           
             displaySoftwarePanel.Visible = true;
             addSoftwarePanel.Visible = false;
             softwareUpdatePanel.Visible = false;
@@ -649,19 +692,14 @@ namespace FinancialServiceApplication
         {
 
         }       
-        private void btnDeleteSoftwareFromDatabase_Click_1(object sender, EventArgs e)
-        {
-            SOFTWARE.eraseSoftware(dbconnection, sqlQueries, Convert.ToInt16(deleteSoftwareUsingSoftID.Text));
-            deleteSoftwareUsingSoftID.Text = "";
-            displaySoftwarePanel.Visible = true;
-        }
+    
 
-        private void button4_Click_1(object sender, EventArgs e)
+        private void btnBackToDisplaySoftwareFromDeletePage_Click_1(object sender, EventArgs e)
         {
             softwareUpdatePanel.Visible = false;
             displaySoftwarePanel.Visible = true;
             addSoftwarePanel.Visible = false;
-            deleteSoftwarePanel.Visible = false;
+          
         }
 
         private void BtnGoToDeleteSoftware_Click(object sender, EventArgs e)
@@ -669,8 +707,155 @@ namespace FinancialServiceApplication
             softwareUpdatePanel.Visible = false;
             displaySoftwarePanel.Visible = false;
             addSoftwarePanel.Visible = false;
-            deleteSoftwarePanel.Visible = true;
-        }            
+          
+        }
+
+        private void logInForm_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+        private void usersList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void updateUser_Click(object sender, EventArgs e)
+        {
+            deleteUserPanel.Visible = false;
+            //homePage.Visible = false;
+            updateUserRolePanel.Visible = true;
+            adminDataGridViewPanel.Visible = false;
+        }
+
+        private void BtnBackToAdminDash_Click(object sender, EventArgs e)
+        {
+            deleteUserPanel.Visible = false;
+            //homePage.Visible = false;
+            updateUserRolePanel.Visible = false;
+            adminDataGridViewPanel.Visible = true;
+        }
+
+        private void BtnBackToAdminDashboard_Click(object sender, EventArgs e)
+        {
+            deleteUserPanel.Visible = false;
+           // homePage.Visible = false;
+            updateUserRolePanel.Visible = false;
+            adminDataGridViewPanel.Visible = true;
+        }
+
+        private void deleteUser_Click(object sender, EventArgs e)
+        {
+            PanelVisibility(deleteUserPanel);
+            deleteUserPanel.Visible = true;
+            updateUserRolePanel.Visible = false;
+            adminDataGridViewPanel.Visible = false;
+            //homePage.Visible = false;
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void adminDataGridViewPanel_Paint(object sender, PaintEventArgs e)
+        {
+            DataSet getUser = dbconnection.LoadUsers(sqlQueries.displayUser());
+            usersList.DataSource = getUser.Tables[0];
+            //adminDataGridViewPanel.Visible = false;
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            softIDTextBox.ReadOnly = true;
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                dataGridView2.CurrentRow.Selected = true;
+                //SOFTWARE.changeSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDescTextBox.Text, filePath.Text);
+                softIDTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["software_id"].FormattedValue.ToString();
+                // Assuming "software_name" is in the first column (index 0)
+                updateSoftNameTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["software_name"].FormattedValue.ToString();
+
+                // Assuming "description" is in the fourth column (index 3)
+                updateSoftDescTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["description"].FormattedValue.ToString();
+
+                // Assuming "path" is in the fifth column (index 4)
+                filePath.Text = dataGridView2.Rows[e.RowIndex].Cells["document_to_attach"].FormattedValue.ToString();
+
+                // Show the update page
+                softwareUpdatePanel.Visible = true;
+            }
+            else if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {         
+                softIDTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["software_id"].FormattedValue.ToString();
+                updateSoftNameTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["software_name"].FormattedValue.ToString();   
+                updateSoftDescTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["description"].FormattedValue.ToString();
+                filePath.Text = dataGridView2.Rows[e.RowIndex].Cells["document_to_attach"].FormattedValue.ToString();
+                softwareUpdatePanel.Visible = true;
+            }
+        }
+
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteSoftwareFromDatabase_Click(object sender, EventArgs e)
+        {
+            SOFTWARE.eraseSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDescTextBox.Text, filePath.Text);
+            // Clear the text boxes
+            softIDTextBox.Text = "";
+            updateSoftNameTextBox.Text = "";
+            updateSoftDescTextBox.Text = "";
+            filePath.Text = "";
+
+        }
+
+        private void displayVendorInGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            updateRefNoTextBox.ReadOnly = true;
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && displayVendorInGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                displayVendorInGridView.CurrentRow.Selected = true;
+                //SOFTWARE.changeSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDescTextBox.Text, filePath.Text);
+                updateRefNoTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["ref_no"].FormattedValue.ToString();
+                // Assuming "software_name" is in the first column (index 0)
+                comTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_name"].FormattedValue.ToString();
+
+                // Assuming "description" is in the fourth column (index 3)
+                webTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_website"].FormattedValue.ToString();
+
+                // Assuming "path" is in the fifth column (index 4)
+                estTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_established"].FormattedValue.ToString();
+                empTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["no_of_employees"].FormattedValue.ToString();
+
+                // Show the update page
+                updateVendorPanel.Visible = true;
+            }
+            else if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && displayVendorInGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                updateRefNoTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["ref_no"].FormattedValue.ToString();
+                comTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_name"].FormattedValue.ToString();
+                webTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_website"].FormattedValue.ToString();
+                estTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_established"].FormattedValue.ToString();
+                empTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["no_of_employees"].FormattedValue.ToString();
+                updateVendorPanel.Visible = true;
+            }
+        }
+
+        private void btnDeleteVendor_Click(object sender, EventArgs e)
+        {
+            VENDOR.eraseVendor(dbconnection, sqlQueries, Convert.ToInt16(updateRefNoTextBox.Text), comTextBox.Text, webTextBox.Text, estTextBox.Text, empTextBox.Text);
+            updateRefNoTextBox.Text = "";
+            comTextBox.Text = "";
+            webTextBox.Text = "";
+            estTextBox.Text = "";
+            empTextBox.Text = "";
+        }
+        /* SOFTWARE.eraseSoftware(dbconnection, sqlQueries, Convert.ToInt16(deleteSoftwareUsingSoftID.Text));
+deleteSoftwareUsingSoftID.Text = "";
+displaySoftwarePanel.Visible = true;
+}*/
     }
 }
-
