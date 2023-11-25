@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml.Linq;
+using System.Security.Cryptography;
 
 namespace FinancialServiceApplication
 {
@@ -26,10 +27,10 @@ namespace FinancialServiceApplication
         //the connection string
         private string connectionString;
 
-        ArrayList parameterList = new ArrayList();
+        // ArrayList parameterList = new ArrayList();
 
         //connnection to the database
-        private SqlConnection connectToDB;
+        // private SqlConnection connectToDB;
 
         public application Application { get; }
 
@@ -105,8 +106,12 @@ namespace FinancialServiceApplication
 
         // This code retrieves the hashed password specified to the inputed email fron the database
         // It returns the password as a string else it returns null
-        public string RetrieveUserPassword(string sqlQuery, string email)
+
+        public string RetrieveUserPassword(string sqlQuery, string email, out string firstname,out string role)
         {
+            firstname = null;
+            role = null;
+
             // A connection to the database is established
             using (SqlConnection connectToDB = new SqlConnection(connectionString))
             {
@@ -123,13 +128,14 @@ namespace FinancialServiceApplication
                     // Excute the sqlQuery and retrieve the count
                     SqlDataReader reader = sqlCommand.ExecuteReader();
 
+
                     if (reader.Read())
                     {
-                        string firstname = reader["firstname"].ToString();
+                        firstname = reader["firstname"].ToString();
                         string hashedPassword = reader["password"].ToString();
-                        //string role = reader["role"].ToString();
+                        role = reader["role"].ToString();
 
-                        // Application.DisplayGreeting(firstname, role);
+                        //Application.DisplayGreeting(firstname, role);
 
                         return hashedPassword;
                     }
@@ -139,61 +145,30 @@ namespace FinancialServiceApplication
 
                 }
             }
-
         }
 
-        public bool ValidateUser(string email, string password, out string userRole)
+        public bool ValidateUser(string email, string password, out string firstname, out string role)
         {
-            string databaseHashedPassword = RetrieveUserPassword(SqlQueries.VALIDATE_LOGIN_DETAILS, email);
+            string databaseHashedPassword = RetrieveUserPassword(SqlQueries.VALIDATE_LOGIN_DETAILS, email, out string retrievedfirstname, out string retrievedrole);
+
+            firstname = retrievedfirstname;
+            role = retrievedrole;
 
             if (databaseHashedPassword != null)
             {
                 bool passwordMatched = PasswordHasher.VerifyPassword(password, databaseHashedPassword);
 
-                if (passwordMatched)
-                {
-                    // Retrieve the user's role after successful login
-                    userRole = RetrieveUserRole(email);
-                    return true;
-                }
+                return passwordMatched;
             }
 
-            // If login fails or user not found, set userRole to a default value (or handle it based on your logic)
-            userRole = "Unknown";
             return false;
-        }
-
-        public string RetrieveUserRole(string email)
-        {
-            using (SqlConnection connectToDB = new SqlConnection(connectionString))
-            {
-                connectToDB.Open();
-
-                // SQL query to retrieve the user role based on the email
-                string sqlQuery = "SELECT role FROM [USER] WHERE email = @email";
-
-                using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB))
-                {
-                    sqlCommand.Parameters.AddWithValue("@email", email);
-
-                    SqlDataReader reader = sqlCommand.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        return reader["role"].ToString();
-                    }
-
-                    // If the user is not found or the role is not available, return a default value or handle it appropriately
-                    return "Unknown"; // Change this to an appropriate default value or handle it based on your application logic
-                }
-            }
         }
        
         //
         //
         //
         //
-        //
+        // VENDOR AND SOFTWARE
         //
         //
         //
@@ -274,7 +249,6 @@ namespace FinancialServiceApplication
             }
         }
 
-
         public DataSet LoadVendors(string sqlQuery)
         {
             try
@@ -299,6 +273,7 @@ namespace FinancialServiceApplication
                 throw;
             }
         }
+
         public DataSet LoadSoftware(string sqlQuery)
         {
             try
@@ -323,6 +298,49 @@ namespace FinancialServiceApplication
                 throw;
             }
         }
+
+        //
+        //
+        //
+        //
+        // ADMINISTRATOR
+        //
+        //
+        //
+        //
+
+        public void UpdateUserRole(string sqlQuery, int userId, string newRole)
+        {
+            using (SqlConnection connectToDB = new SqlConnection(connectionString))
+            {
+
+                //open connection
+                connectToDB.Open();
+
+                using(SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB)) 
+                {
+                    sqlCommand.Parameters.AddWithValue("@user_id", userId);
+                    sqlCommand.Parameters.AddWithValue("@role", newRole);
+
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                    if (rowsAffected > 0) 
+                    {
+                        MessageBox.Show("USER ROLE UPDATED SUCCESSFULLY", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else 
+                    {
+                        MessageBox.Show("OPERATION FAILED. PLEASE CHECK DETAILS!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+                
+                // Close the connection
+                connectToDB.Close();
+
+            }
+        }
+
         public DataSet LoadUsers(string sqlQuery)
         {
             try
@@ -347,10 +365,6 @@ namespace FinancialServiceApplication
                 throw;
             }
         }
-
-
-
-
 
     }
 }

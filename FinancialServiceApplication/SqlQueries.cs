@@ -14,7 +14,10 @@ namespace FinancialServiceApplication
 
         public static string VALIDATE_LOGIN_DETAILS = "SELECT firstname, password, role FROM [USER] WHERE email = @email";
 
+        public static string UPDATE_USER_ROLE = "UPDATE [USER] SET role = @role WHERE User_id = @user_id";
+
         public static string ADD_NEW_VENDOR = "INSERT INTO COMPANY([company_name], [company_website], [company_established], [no_of_employees] ) VALUES(@company_name, @company_website, @company_established, @no_of_employees)";
+
         public static string ADD_NEW_SOFTWARE = " INSERT INTO SOFTWARE ([software_name], [description], [document_to_attach]) VALUES (@software_name, @description, @document_to_attach)";
         public static string joinquery = "SELECT software_id, software_name, description " +
                                   "FROM SOFTWARE " +
