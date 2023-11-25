@@ -66,30 +66,33 @@ namespace FinancialServiceApplication
         //
         //
         //
-        public void saveToDatabase(string sqlQuery, ArrayList parameters, string role)
+        public void saveToDatabase(string sqlQuery, ArrayList parameters)
         {
             try
             {
                 using (SqlConnection connectToDB = new SqlConnection(connectionString))
                 {
+
+                    //open connection
                     connectToDB.Open();
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB);
+
+                    //set the sqlCommand's properties
                     sqlCommand.CommandType = CommandType.Text;
 
-                    // Add other parameters
                     foreach (SqlParameter parameter in parameters)
                     {
                         sqlCommand.Parameters.Add(parameter);
                     }
 
-                    // Check if the query contains a parameter for role before adding it
-                    if (sqlQuery.Contains("@role"))
-                    {
-                        sqlCommand.Parameters.AddWithValue("@role", role);
-                    }
-
+                    //execute the command
                     sqlCommand.ExecuteNonQuery();
-                    Console.WriteLine("Success.");
+
+                    MessageBox.Show("YOU HAVE SUCCESSFULLY JOINED THE COMMUNITY", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Close the connection
+                    connectToDB.Close();
+
                 }
             }
             catch (Exception ex)

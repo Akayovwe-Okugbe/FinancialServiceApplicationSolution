@@ -46,14 +46,22 @@ namespace FinancialServiceApplication
             listPanel.Add(signUpPage);
             listPanel.Add(header);
             listPanel.Add(footer);
+
             listPanel.Add(vendorPage);
-            listPanel.Add(softwarePage);
             listPanel.Add(vendorDisplay);
             listPanel.Add(addVendorPanel);
             listPanel.Add(updateVendorPanel);
+
+            listPanel.Add(softwarePage);
             listPanel.Add(displaySoftwarePanel);
             listPanel.Add(addSoftwarePanel);
             listPanel.Add(softwareUpdatePanel);
+
+            listPanel.Add(adminDataGridViewPanel);
+            listPanel.Add(updateUserRolePanel);
+            listPanel.Add(deleteUserPanel);
+
+            listPanel.Add(extraPanel);
         }
 
         //
@@ -70,7 +78,7 @@ namespace FinancialServiceApplication
                 !string.IsNullOrEmpty(emailBox.Text) && !string.IsNullOrEmpty(passwordBox.Text) &&
                 !string.IsNullOrEmpty(genderBox.Text) && !string.IsNullOrEmpty(mobileBox.Text) &&
                 !string.IsNullOrEmpty(addressBox.Text) && !string.IsNullOrEmpty(postcodeBox.Text) &&
-                !string.IsNullOrEmpty(countryBox.Text) && (adminRadioButton.Checked || consultantRadioButton.Checked))
+                !string.IsNullOrEmpty(countryBox.Text))
             {
                 // The signup button is displayed if the required fields are not null
                 signUpButton.Visible = true;
@@ -147,6 +155,12 @@ namespace FinancialServiceApplication
         private void SignUpMenuItem_Click(object sender, EventArgs e)
         {
             menuFunctions.Visible = false;
+            joinCommunityLabel.Text = "JOIN THE COMMUNITY";
+            goBackButtonS.Visible = true;
+            backToAdminPage.Visible = false;
+            logInRedirectLabel.Visible = true;
+            logInLink.Visible = true;
+            signUpButton.Text = "SIGN UP";
             PanelVisibility(signUpPage);
         }
 
@@ -154,6 +168,7 @@ namespace FinancialServiceApplication
         {
             // After successful logout
             MessageBox.Show("LOG OUT SUCCESSFULLY!", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            greetingLabel.Visible = false;
             PanelVisibility(header, footer, homePage);
             vendorButton.Visible = false;
             softwareButton.Visible = false;
@@ -168,14 +183,19 @@ namespace FinancialServiceApplication
 
         private void CompanyButton_Click(object sender, EventArgs e)
         {
-            PanelVisibility(vendorPage, vendorDisplay);
-           // deleteVendorPanel.Visible = false;
+            PanelVisibility(header, vendorPage, vendorDisplay);
         }
 
         private void SoftwareButton_Click(object sender, EventArgs e)
         {
-            PanelVisibility(softwarePage, displaySoftwarePanel);
+            PanelVisibility(header, softwarePage, displaySoftwarePanel);
                           
+        }
+
+        public void DisplayGreeting(string firstname, string role)
+        {
+            greetingLabel.Visible = true;
+            greetingLabel.Text = $"Welcome, {firstname}! [{role}]";
         }
 
         //
@@ -400,16 +420,6 @@ namespace FinancialServiceApplication
             CheckSignUpTextBoxes();
         }
 
-        private void adminRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckSignUpTextBoxes();
-        }
-
-        private void consultantRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckSignUpTextBoxes();
-        }
-
         private void SignUpPageGoBackButton_Click(object sender, EventArgs e)
         {
             menuFunctions.Visible = true;
@@ -438,15 +448,16 @@ namespace FinancialServiceApplication
             string address = addressBox.Text;
             string postcode = postcodeBox.Text;
             string country = countryBox.Text;
-            string role = ""; //"NON-CONSULTANT";
-            if(adminRadioButton.Checked)
+            string role = "NON-CONSULTANT";
+
+            /* if(adminRadioButton.Checked)
             {
                 role = "Admin";
             }
             else if(consultantRadioButton.Checked)
             {
                 role = "Consultant";
-            }
+            } */
 
             //Add parameters to the Arraylist
             parameterList.Add(new SqlParameter("firstName", firstname));
@@ -458,10 +469,36 @@ namespace FinancialServiceApplication
             parameterList.Add(new SqlParameter("address", address));
             parameterList.Add(new SqlParameter("postcode", postcode));
             parameterList.Add(new SqlParameter("country", country));
-            //parameterList.Add(new SqlParameter("role", role));
+            parameterList.Add(new SqlParameter("role", role));
 
             //Save to the Database
-            DBConnection.getInstanceOfDBConnection().saveToDatabase(SqlQueries.SAVE_USER_TO_DATABASE, parameterList, role);
+            DBConnection.getInstanceOfDBConnection().saveToDatabase(SqlQueries.SAVE_USER_TO_DATABASE, parameterList);
+
+            if (joinCommunityLabel.Text == "ADD A NEW USER")
+            {
+                PanelVisibility(adminDataGridViewPanel);
+                deleteUser.Visible = true;
+                updateUser.Visible = true;
+                createUser.Visible = true;
+            }
+            else
+            {
+                // After successful signup, display a complete home screen
+                PanelVisibility(header, footer, homePage);
+                vendorButton.Visible = true;
+                softwareButton.Visible = true;
+                searchText.Visible = true;
+                searchButton.Visible = true;
+                menuFunctions.Visible = true;
+                logoutMenuItem.Visible = true;
+                loginMenuItem.Visible = false;
+                signupMenuItem.Visible = false;
+
+                DisplayGreeting(firstname, role);
+            }
+            
+
+            /*
             parameterList.Clear();
             PanelVisibility(header, footer, homePage);
             vendorButton.Visible = false;
@@ -472,7 +509,8 @@ namespace FinancialServiceApplication
             logoutMenuItem.Visible = false;
             loginMenuItem.Visible = true;
             signupMenuItem.Visible = true;
-            adminDataGridViewPanel.Visible = false;
+            adminDataGridViewPanel.Visible = false; */
+
         }
 
         //
@@ -481,16 +519,11 @@ namespace FinancialServiceApplication
         //
         //
 
-        public void DisplayGreeting(string firstname, string role)
-        {
-            greetingLabel.Text = $"Welcome, {firstname}! [{role}]";
-        }
         private void vendorPage_Paint(object sender, PaintEventArgs e)
         {
         }
         private void BtnShowVendorPage_Click(object sender, EventArgs e)
         {
-            
             vendorDisplay.Visible = false;
             addVendorPanel.Visible = true;
             updateVendorPanel.Visible = false;        
@@ -543,10 +576,12 @@ namespace FinancialServiceApplication
         }
 
         private void BtnShowVendors_Click(object sender, EventArgs e)
-        {          
-            vendorDisplay.Visible = true;
-            addVendorPanel.Visible = false;
-            updateVendorPanel.Visible =false;
+        {
+
+            PanelVisibility(vendorPage, vendorDisplay);
+            //vendorDisplay.Visible = true;
+            //addVendorPanel.Visible = false;
+            //updateVendorPanel.Visible =false;
             
         }
 
@@ -558,10 +593,11 @@ namespace FinancialServiceApplication
        
         private void btnGoBackToAddingVendor_Click(object sender, EventArgs e)
         {
-           
-            vendorDisplay.Visible = true;
-            addVendorPanel.Visible = false;
-            updateVendorPanel.Visible = false;
+
+            PanelVisibility(vendorPage, vendorDisplay);
+            //vendorDisplay.Visible = true;
+            //addVendorPanel.Visible = false;
+            //updateVendorPanel.Visible = false;
         }    
 
         private void vendorDisplay_Paint(object sender, PaintEventArgs e)
@@ -643,7 +679,7 @@ namespace FinancialServiceApplication
         private void BtnGoBackToHomePage_Click(object sender, EventArgs e)
         {          
             menuFunctions.Visible = true;
-            PanelVisibility(homePage, searchText);
+            PanelVisibility(header, homePage, searchText);
         }
 
         private void btnGoBackToDisplaySoftwarePanel_Click(object sender, EventArgs e)
@@ -722,34 +758,49 @@ namespace FinancialServiceApplication
 
         private void updateUser_Click(object sender, EventArgs e)
         {
-            deleteUserPanel.Visible = false;
+            PanelVisibility(adminDataGridViewPanel, updateUserRolePanel);
+            deleteUser.Visible = false;
+            updateUser.Visible = false;
+            createUser.Visible = false;
+            //deleteUserPanel.Visible = false;
             //homePage.Visible = false;
-            updateUserRolePanel.Visible = true;
-            adminDataGridViewPanel.Visible = false;
+            //updateUserRolePanel.Visible = true;
+            //adminDataGridViewPanel.Visible = false;
         }
 
         private void BtnBackToAdminDash_Click(object sender, EventArgs e)
         {
-            deleteUserPanel.Visible = false;
+            PanelVisibility(adminDataGridViewPanel);
+            deleteUser.Visible = true;
+            updateUser.Visible = true;
+            createUser.Visible = true;
+            //deleteUserPanel.Visible = false;
             //homePage.Visible = false;
-            updateUserRolePanel.Visible = false;
-            adminDataGridViewPanel.Visible = true;
+            //updateUserRolePanel.Visible = false;
+            //adminDataGridViewPanel.Visible = true;
         }
 
         private void BtnBackToAdminDashboard_Click(object sender, EventArgs e)
         {
-            deleteUserPanel.Visible = false;
-           // homePage.Visible = false;
-            updateUserRolePanel.Visible = false;
-            adminDataGridViewPanel.Visible = true;
+            PanelVisibility(adminDataGridViewPanel);
+            deleteUser.Visible = true;
+            updateUser.Visible = true;
+            createUser.Visible = true;
+            //deleteUserPanel.Visible = false;
+            // homePage.Visible = false;
+            //updateUserRolePanel.Visible = false;
+            //adminDataGridViewPanel.Visible = true;
         }
 
         private void deleteUser_Click(object sender, EventArgs e)
         {
-            PanelVisibility(deleteUserPanel);
-            deleteUserPanel.Visible = true;
-            updateUserRolePanel.Visible = false;
-            adminDataGridViewPanel.Visible = false;
+            PanelVisibility(adminDataGridViewPanel, deleteUserPanel);
+            deleteUser.Visible = false;
+            updateUser.Visible = false;
+            createUser.Visible = false;
+            //deleteUserPanel.Visible = true;
+            //updateUserRolePanel.Visible = false;
+            //adminDataGridViewPanel.Visible = false;
             //homePage.Visible = false;
         }
 
@@ -852,6 +903,64 @@ namespace FinancialServiceApplication
             webTextBox.Text = "";
             estTextBox.Text = "";
             empTextBox.Text = "";
+        }
+
+        private void label30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void homePage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void greetingLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void signUpPage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ePanelButton_Click(object sender, EventArgs e)
+        {
+            PanelVisibility(extraPanel);
+        }
+
+        private void adminButton_Click(object sender, EventArgs e)
+        {
+            PanelVisibility(adminDataGridViewPanel);
+            deleteUser.Visible = true;
+            updateUser.Visible = true;
+            createUser.Visible = true;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void createUser_Click(object sender, EventArgs e)
+        {
+            joinCommunityLabel.Text = "ADD A NEW USER";
+            goBackButtonS.Visible = false;
+            backToAdminPage.Visible = true;
+            logInRedirectLabel.Visible = false;
+            logInLink.Visible = false;
+            signUpButton.Text = "ADD USER";
+            PanelVisibility(signUpPage);
+            
+        }
+
+        private void backToAdminPage_Click(object sender, EventArgs e)
+        {
+            PanelVisibility(adminDataGridViewPanel);
+            deleteUser.Visible = true;
+            updateUser.Visible = true;
+            createUser.Visible = true;
         }
         /* SOFTWARE.eraseSoftware(dbconnection, sqlQueries, Convert.ToInt16(deleteSoftwareUsingSoftID.Text));
 deleteSoftwareUsingSoftID.Text = "";

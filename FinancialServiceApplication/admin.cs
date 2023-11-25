@@ -63,7 +63,7 @@ namespace FinancialServiceApplication
                 parameters.Add(new SqlParameter("user_id", user_id));
 
                 // Call the appropriate method to delete the user from the database
-                dBConnection.saveToDatabase(deleteUserQuery, parameters, ""); // Add an empty string or provide an appropriate value for the 'role' parameter
+                dBConnection.saveToDatabase(deleteUserQuery, parameters); // Add an empty string or provide an appropriate value for the 'role' parameter
                 Console.WriteLine("User deleted successfully.");
             }
             catch (Exception ex)

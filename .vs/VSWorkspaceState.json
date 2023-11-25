@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\FinancialServiceApplication"
   ],
-  "SelectedNode": "\\FinancialServiceApplicationSolution.sln",
+  "SelectedNode": "\\FinancialServiceApplication\\DBConnection.cs",
   "PreviewInSolutionExplorer": false
 }
