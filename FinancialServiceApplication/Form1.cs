@@ -239,6 +239,12 @@ namespace FinancialServiceApplication
 
             if (enteredCode == accessCode)
             {
+                menuFunctions.Visible = true;
+                HomeMenuItem.Visible = true;               
+                loginMenuItem.Visible = true;
+                signupMenuItem.Visible = true;
+                aboutUsMenuItem.Visible = false;
+                logoutMenuItem.Visible = false;
                 PanelVisibility(adminDataGridViewPanel);
                 deleteUser.Visible = true;
                 updateUser.Visible = true;
@@ -332,6 +338,7 @@ namespace FinancialServiceApplication
                     deleteUser.Visible = true;
                     updateUser.Visible = true;
                     createUser.Visible = true;
+                    menuFunctions.Visible = true;
                     logoutMenuItem.Visible = true;
                     HomeMenuItem.Visible = false;
                     aboutUsMenuItem.Visible = false;

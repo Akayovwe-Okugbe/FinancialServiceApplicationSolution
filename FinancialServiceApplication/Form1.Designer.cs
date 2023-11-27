@@ -45,8 +45,12 @@ namespace FinancialServiceApplication
             this.aboutUsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.homePage = new System.Windows.Forms.Panel();
-            this.QuoteOTYPanelButton = new System.Windows.Forms.Button();
+            this.adminAccessPanel = new System.Windows.Forms.Panel();
+            this.adminCodeLabel = new System.Windows.Forms.Label();
+            this.adminAccessTextBox = new System.Windows.Forms.TextBox();
             this.adminButton = new System.Windows.Forms.Button();
+            this.QuoteOTYPanelButton = new System.Windows.Forms.Button();
+            this.adminAccessButton = new System.Windows.Forms.Button();
             this.SiteDescriptionText = new System.Windows.Forms.Label();
             this.softwareButton = new System.Windows.Forms.Button();
             this.vendorButton = new System.Windows.Forms.Button();
@@ -58,6 +62,7 @@ namespace FinancialServiceApplication
             this.deleteUser = new System.Windows.Forms.Button();
             this.updateUser = new System.Windows.Forms.Button();
             this.updateUserRolePanel = new System.Windows.Forms.Panel();
+            this.selectUserRoleBox = new System.Windows.Forms.ComboBox();
             this.label36 = new System.Windows.Forms.Label();
             this.UpdateUserRoleButton = new System.Windows.Forms.Button();
             this.userIDUpdateTextBox = new System.Windows.Forms.TextBox();
@@ -156,13 +161,12 @@ namespace FinancialServiceApplication
             this.label13 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.softwarePage = new System.Windows.Forms.Panel();
-            this.displaySoftwarePanel = new System.Windows.Forms.Panel();
             this.softwareLabel = new System.Windows.Forms.Label();
+            this.displaySoftwarePanel = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.BtnGoBackToHomePage = new System.Windows.Forms.Button();
             this.BtnSoftwareAddPage = new System.Windows.Forms.Button();
             this.btnAddSoft = new System.Windows.Forms.Button();
-            this.addSoftwarePanel = new System.Windows.Forms.Panel();
             this.softwareUpdatePanel = new System.Windows.Forms.Panel();
             this.btnDeleteSoftwareFromDatabase = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
@@ -176,6 +180,7 @@ namespace FinancialServiceApplication
             this.filePath = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.addSoftwarePanel = new System.Windows.Forms.Panel();
             this.btnGoBackToDisplaySoftwarePanel = new System.Windows.Forms.Button();
             this.softwareDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.softwareNameTextBox = new System.Windows.Forms.TextBox();
@@ -190,16 +195,12 @@ namespace FinancialServiceApplication
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.extraPanel = new System.Windows.Forms.Panel();
-            this.selectUserRoleBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.adminAccessPanel = new System.Windows.Forms.Panel();
-            this.adminAccessButton = new System.Windows.Forms.Button();
-            this.adminAccessTextBox = new System.Windows.Forms.TextBox();
-            this.adminCodeLabel = new System.Windows.Forms.Label();
             this.header.SuspendLayout();
             this.HeaderSearch.SuspendLayout();
             this.menuFunctions.SuspendLayout();
             this.homePage.SuspendLayout();
+            this.adminAccessPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.adminDataGridViewPanel.SuspendLayout();
             this.updateUserRolePanel.SuspendLayout();
@@ -222,10 +223,9 @@ namespace FinancialServiceApplication
             this.softwarePage.SuspendLayout();
             this.displaySoftwarePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.addSoftwarePanel.SuspendLayout();
             this.softwareUpdatePanel.SuspendLayout();
+            this.addSoftwarePanel.SuspendLayout();
             this.extraPanel.SuspendLayout();
-            this.adminAccessPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // header
@@ -337,6 +337,33 @@ namespace FinancialServiceApplication
             this.homePage.Controls.Add(this.pictureBox1);
             this.homePage.Name = "homePage";
             // 
+            // adminAccessPanel
+            // 
+            resources.ApplyResources(this.adminAccessPanel, "adminAccessPanel");
+            this.adminAccessPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.adminAccessPanel.Controls.Add(this.adminCodeLabel);
+            this.adminAccessPanel.Controls.Add(this.adminAccessTextBox);
+            this.adminAccessPanel.Controls.Add(this.adminButton);
+            this.adminAccessPanel.Name = "adminAccessPanel";
+            // 
+            // adminCodeLabel
+            // 
+            resources.ApplyResources(this.adminCodeLabel, "adminCodeLabel");
+            this.adminCodeLabel.ForeColor = System.Drawing.Color.White;
+            this.adminCodeLabel.Name = "adminCodeLabel";
+            // 
+            // adminAccessTextBox
+            // 
+            resources.ApplyResources(this.adminAccessTextBox, "adminAccessTextBox");
+            this.adminAccessTextBox.Name = "adminAccessTextBox";
+            // 
+            // adminButton
+            // 
+            resources.ApplyResources(this.adminButton, "adminButton");
+            this.adminButton.Name = "adminButton";
+            this.adminButton.UseVisualStyleBackColor = true;
+            this.adminButton.Click += new System.EventHandler(this.adminButton_Click);
+            // 
             // QuoteOTYPanelButton
             // 
             resources.ApplyResources(this.QuoteOTYPanelButton, "QuoteOTYPanelButton");
@@ -345,12 +372,14 @@ namespace FinancialServiceApplication
             this.QuoteOTYPanelButton.UseVisualStyleBackColor = true;
             this.QuoteOTYPanelButton.Click += new System.EventHandler(this.ePanelButton_Click);
             // 
-            // adminButton
+            // adminAccessButton
             // 
-            resources.ApplyResources(this.adminButton, "adminButton");
-            this.adminButton.Name = "adminButton";
-            this.adminButton.UseVisualStyleBackColor = true;
-            this.adminButton.Click += new System.EventHandler(this.adminButton_Click);
+            resources.ApplyResources(this.adminAccessButton, "adminAccessButton");
+            this.adminAccessButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.adminAccessButton.ForeColor = System.Drawing.Color.White;
+            this.adminAccessButton.Name = "adminAccessButton";
+            this.adminAccessButton.UseVisualStyleBackColor = false;
+            this.adminAccessButton.Click += new System.EventHandler(this.adminAccessButton_Click);
             // 
             // SiteDescriptionText
             // 
@@ -446,6 +475,16 @@ namespace FinancialServiceApplication
             this.updateUserRolePanel.Controls.Add(this.BtnBackToAdminDash);
             this.updateUserRolePanel.Controls.Add(this.label35);
             this.updateUserRolePanel.Name = "updateUserRolePanel";
+            // 
+            // selectUserRoleBox
+            // 
+            this.selectUserRoleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.selectUserRoleBox, "selectUserRoleBox");
+            this.selectUserRoleBox.FormattingEnabled = true;
+            this.selectUserRoleBox.Items.AddRange(new object[] {
+            resources.GetString("selectUserRoleBox.Items"),
+            resources.GetString("selectUserRoleBox.Items1")});
+            this.selectUserRoleBox.Name = "selectUserRoleBox";
             // 
             // label36
             // 
@@ -1144,6 +1183,13 @@ namespace FinancialServiceApplication
             this.softwarePage.Controls.Add(this.addSoftwarePanel);
             this.softwarePage.Name = "softwarePage";
             // 
+            // softwareLabel
+            // 
+            resources.ApplyResources(this.softwareLabel, "softwareLabel");
+            this.softwareLabel.BackColor = System.Drawing.Color.Transparent;
+            this.softwareLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.softwareLabel.Name = "softwareLabel";
+            // 
             // displaySoftwarePanel
             // 
             resources.ApplyResources(this.displaySoftwarePanel, "displaySoftwarePanel");
@@ -1154,13 +1200,6 @@ namespace FinancialServiceApplication
             this.displaySoftwarePanel.Controls.Add(this.btnAddSoft);
             this.displaySoftwarePanel.Name = "displaySoftwarePanel";
             this.displaySoftwarePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.displaySoftwarePanel_Paint);
-            // 
-            // softwareLabel
-            // 
-            resources.ApplyResources(this.softwareLabel, "softwareLabel");
-            this.softwareLabel.BackColor = System.Drawing.Color.Transparent;
-            this.softwareLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.softwareLabel.Name = "softwareLabel";
             // 
             // dataGridView2
             // 
@@ -1195,21 +1234,6 @@ namespace FinancialServiceApplication
             this.btnAddSoft.Name = "btnAddSoft";
             this.btnAddSoft.UseVisualStyleBackColor = false;
             this.btnAddSoft.Click += new System.EventHandler(this.btnAddSoft_Click);
-            // 
-            // addSoftwarePanel
-            // 
-            resources.ApplyResources(this.addSoftwarePanel, "addSoftwarePanel");
-            this.addSoftwarePanel.BackColor = System.Drawing.Color.Transparent;
-            this.addSoftwarePanel.Controls.Add(this.btnGoBackToDisplaySoftwarePanel);
-            this.addSoftwarePanel.Controls.Add(this.softwareDescriptionTextBox);
-            this.addSoftwarePanel.Controls.Add(this.softwareNameTextBox);
-            this.addSoftwarePanel.Controls.Add(this.label20);
-            this.addSoftwarePanel.Controls.Add(this.label22);
-            this.addSoftwarePanel.Controls.Add(this.label23);
-            this.addSoftwarePanel.Controls.Add(this.btnAddSoftware);
-            this.addSoftwarePanel.Controls.Add(this.pathFile);
-            this.addSoftwarePanel.Controls.Add(this.btnBrowseFiles);
-            this.addSoftwarePanel.Name = "addSoftwarePanel";
             // 
             // softwareUpdatePanel
             // 
@@ -1309,6 +1333,21 @@ namespace FinancialServiceApplication
             this.label18.ForeColor = System.Drawing.Color.DarkGreen;
             this.label18.Name = "label18";
             // 
+            // addSoftwarePanel
+            // 
+            resources.ApplyResources(this.addSoftwarePanel, "addSoftwarePanel");
+            this.addSoftwarePanel.BackColor = System.Drawing.Color.Transparent;
+            this.addSoftwarePanel.Controls.Add(this.btnGoBackToDisplaySoftwarePanel);
+            this.addSoftwarePanel.Controls.Add(this.softwareDescriptionTextBox);
+            this.addSoftwarePanel.Controls.Add(this.softwareNameTextBox);
+            this.addSoftwarePanel.Controls.Add(this.label20);
+            this.addSoftwarePanel.Controls.Add(this.label22);
+            this.addSoftwarePanel.Controls.Add(this.label23);
+            this.addSoftwarePanel.Controls.Add(this.btnAddSoftware);
+            this.addSoftwarePanel.Controls.Add(this.pathFile);
+            this.addSoftwarePanel.Controls.Add(this.btnBrowseFiles);
+            this.addSoftwarePanel.Name = "addSoftwarePanel";
+            // 
             // btnGoBackToDisplaySoftwarePanel
             // 
             this.btnGoBackToDisplaySoftwarePanel.BackColor = System.Drawing.Color.DarkGreen;
@@ -1396,51 +1435,12 @@ namespace FinancialServiceApplication
             this.extraPanel.Controls.Add(this.label3);
             this.extraPanel.Name = "extraPanel";
             // 
-            // selectUserRoleBox
-            // 
-            this.selectUserRoleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.selectUserRoleBox, "selectUserRoleBox");
-            this.selectUserRoleBox.FormattingEnabled = true;
-            this.selectUserRoleBox.Items.AddRange(new object[] {
-            resources.GetString("selectUserRoleBox.Items"),
-            resources.GetString("selectUserRoleBox.Items1")});
-            this.selectUserRoleBox.Name = "selectUserRoleBox";
-            // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Name = "label3";
-            // 
-            // adminAccessPanel
-            // 
-            resources.ApplyResources(this.adminAccessPanel, "adminAccessPanel");
-            this.adminAccessPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.adminAccessPanel.Controls.Add(this.adminCodeLabel);
-            this.adminAccessPanel.Controls.Add(this.adminAccessTextBox);
-            this.adminAccessPanel.Controls.Add(this.adminButton);
-            this.adminAccessPanel.Name = "adminAccessPanel";
-            // 
-            // adminAccessButton
-            // 
-            resources.ApplyResources(this.adminAccessButton, "adminAccessButton");
-            this.adminAccessButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.adminAccessButton.ForeColor = System.Drawing.Color.White;
-            this.adminAccessButton.Name = "adminAccessButton";
-            this.adminAccessButton.UseVisualStyleBackColor = false;
-            this.adminAccessButton.Click += new System.EventHandler(this.adminAccessButton_Click);
-            // 
-            // adminAccessTextBox
-            // 
-            resources.ApplyResources(this.adminAccessTextBox, "adminAccessTextBox");
-            this.adminAccessTextBox.Name = "adminAccessTextBox";
-            // 
-            // adminCodeLabel
-            // 
-            resources.ApplyResources(this.adminCodeLabel, "adminCodeLabel");
-            this.adminCodeLabel.ForeColor = System.Drawing.Color.White;
-            this.adminCodeLabel.Name = "adminCodeLabel";
             // 
             // application
             // 
@@ -1468,6 +1468,8 @@ namespace FinancialServiceApplication
             this.menuFunctions.PerformLayout();
             this.homePage.ResumeLayout(false);
             this.homePage.PerformLayout();
+            this.adminAccessPanel.ResumeLayout(false);
+            this.adminAccessPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.adminDataGridViewPanel.ResumeLayout(false);
             this.adminDataGridViewPanel.PerformLayout();
@@ -1503,14 +1505,12 @@ namespace FinancialServiceApplication
             this.softwarePage.PerformLayout();
             this.displaySoftwarePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.addSoftwarePanel.ResumeLayout(false);
-            this.addSoftwarePanel.PerformLayout();
             this.softwareUpdatePanel.ResumeLayout(false);
             this.softwareUpdatePanel.PerformLayout();
+            this.addSoftwarePanel.ResumeLayout(false);
+            this.addSoftwarePanel.PerformLayout();
             this.extraPanel.ResumeLayout(false);
             this.extraPanel.PerformLayout();
-            this.adminAccessPanel.ResumeLayout(false);
-            this.adminAccessPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
