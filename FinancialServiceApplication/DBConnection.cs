@@ -366,5 +366,31 @@ namespace FinancialServiceApplication
             }
         }
 
+        public void LinkVendorToSoftware (string sqlQuery, int vendorId, int softwareId)
+        {
+            using (SqlConnection connectToDB = new SqlConnection(connectionString))
+            {
+
+                //open connection
+                connectToDB.Open();
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB);
+
+                //set the sqlCommand's properties
+                sqlCommand.CommandType = CommandType.Text;
+
+                sqlCommand.Parameters.AddWithValue("@ref_no", vendorId);
+                sqlCommand.Parameters.AddWithValue("@software_id", softwareId);
+
+                //execute the command
+                sqlCommand.ExecuteNonQuery();
+
+                MessageBox.Show("VENDOR LINKED TO SOFTWARE SUCCESSFULLY", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Close the connection
+                connectToDB.Close();
+
+            }
+        }
+
     }
 }

@@ -208,6 +208,7 @@ namespace FinancialServiceApplication
             loginMenuItem.Visible = true;
             signupMenuItem.Visible = true;
             adminDataGridViewPanel.Visible = false;
+            adminAccessButton.Visible = true;
         }
 
         private void CompanyButton_Click(object sender, EventArgs e)
@@ -329,8 +330,11 @@ namespace FinancialServiceApplication
                     searchButton.Visible = true;
                     menuFunctions.Visible = true;
                     logoutMenuItem.Visible = true;
+                    aboutUsMenuItem.Visible = true;
                     loginMenuItem.Visible = false;
                     signupMenuItem.Visible = false;
+                    adminAccessButton.Visible = false;
+                    adminAccessPanel.Visible = false;
                 }
                 else if (role == "ADMINISTRATOR")
                 {
@@ -344,6 +348,8 @@ namespace FinancialServiceApplication
                     aboutUsMenuItem.Visible = false;
                     loginMenuItem.Visible = false;
                     signupMenuItem.Visible = false;
+                    adminAccessButton.Visible = false;
+                    adminAccessPanel.Visible = false;
                 }
                 else
                 {
@@ -354,10 +360,13 @@ namespace FinancialServiceApplication
                     searchButton.Visible = true;
                     menuFunctions.Visible = true;
                     logoutMenuItem.Visible = true;
+                    aboutUsMenuItem.Visible = true;
                     loginMenuItem.Visible = false;
                     signupMenuItem.Visible = false;
                     BtnShowVendorPage.Visible = false;
                     btnAddSoft.Visible = false;
+                    adminAccessButton.Visible = false;
+                    adminAccessPanel.Visible = false;
                 }
                 
                 
@@ -996,6 +1005,19 @@ namespace FinancialServiceApplication
             DBConnection.getInstanceOfDBConnection().UpdateUserRole(SqlQueries.UPDATE_USER_ROLE, userId, newRole);
 
             DisplayAdminPage();
+        }
+
+        private void VendorToSoftwareLinkButton_Click(object sender, EventArgs e)
+        {
+            vendorToSoftwareLinkPanel.Visible = !vendorToSoftwareLinkPanel.Visible;
+        }
+
+        private void InitiateVenSofLinkButton_Click(object sender, EventArgs e)
+        {
+            int ref_no = int.Parse(companyRefTextBox.Text);
+            int software_id = int.Parse(softwareIdTextBox.Text);
+
+            DBConnection.getInstanceOfDBConnection().LinkVendorToSoftware(SqlQueries.LINK_QUERY, ref_no, software_id);
         }
 
 

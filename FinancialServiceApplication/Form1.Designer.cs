@@ -196,6 +196,13 @@ namespace FinancialServiceApplication
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.extraPanel = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.vendorToSoftwareLinkPanel = new System.Windows.Forms.Panel();
+            this.VendorToSoftwareLinkButton = new System.Windows.Forms.Button();
+            this.companyRefTextBox = new System.Windows.Forms.TextBox();
+            this.softwareIdTextBox = new System.Windows.Forms.TextBox();
+            this.InitiateVenSofLinkButton = new System.Windows.Forms.Button();
+            this.softwareLinkLabel = new System.Windows.Forms.Label();
+            this.companyLinkLabel = new System.Windows.Forms.Label();
             this.header.SuspendLayout();
             this.HeaderSearch.SuspendLayout();
             this.menuFunctions.SuspendLayout();
@@ -226,6 +233,7 @@ namespace FinancialServiceApplication
             this.softwareUpdatePanel.SuspendLayout();
             this.addSoftwarePanel.SuspendLayout();
             this.extraPanel.SuspendLayout();
+            this.vendorToSoftwareLinkPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // header
@@ -483,7 +491,8 @@ namespace FinancialServiceApplication
             this.selectUserRoleBox.FormattingEnabled = true;
             this.selectUserRoleBox.Items.AddRange(new object[] {
             resources.GetString("selectUserRoleBox.Items"),
-            resources.GetString("selectUserRoleBox.Items1")});
+            resources.GetString("selectUserRoleBox.Items1"),
+            resources.GetString("selectUserRoleBox.Items2")});
             this.selectUserRoleBox.Name = "selectUserRoleBox";
             // 
             // label36
@@ -960,6 +969,8 @@ namespace FinancialServiceApplication
             // 
             resources.ApplyResources(this.vendorDisplay, "vendorDisplay");
             this.vendorDisplay.BackColor = System.Drawing.Color.Transparent;
+            this.vendorDisplay.Controls.Add(this.VendorToSoftwareLinkButton);
+            this.vendorDisplay.Controls.Add(this.vendorToSoftwareLinkPanel);
             this.vendorDisplay.Controls.Add(this.BtnShowVendorPage);
             this.vendorDisplay.Controls.Add(this.BtnShowHomePage);
             this.vendorDisplay.Controls.Add(this.displayVendorInGridView);
@@ -1442,13 +1453,67 @@ namespace FinancialServiceApplication
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Name = "label3";
             // 
+            // vendorToSoftwareLinkPanel
+            // 
+            this.vendorToSoftwareLinkPanel.BackColor = System.Drawing.Color.White;
+            this.vendorToSoftwareLinkPanel.Controls.Add(this.softwareLinkLabel);
+            this.vendorToSoftwareLinkPanel.Controls.Add(this.companyLinkLabel);
+            this.vendorToSoftwareLinkPanel.Controls.Add(this.InitiateVenSofLinkButton);
+            this.vendorToSoftwareLinkPanel.Controls.Add(this.softwareIdTextBox);
+            this.vendorToSoftwareLinkPanel.Controls.Add(this.companyRefTextBox);
+            resources.ApplyResources(this.vendorToSoftwareLinkPanel, "vendorToSoftwareLinkPanel");
+            this.vendorToSoftwareLinkPanel.Name = "vendorToSoftwareLinkPanel";
+            // 
+            // VendorToSoftwareLinkButton
+            // 
+            this.VendorToSoftwareLinkButton.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.VendorToSoftwareLinkButton, "VendorToSoftwareLinkButton");
+            this.VendorToSoftwareLinkButton.ForeColor = System.Drawing.Color.White;
+            this.VendorToSoftwareLinkButton.Name = "VendorToSoftwareLinkButton";
+            this.VendorToSoftwareLinkButton.UseVisualStyleBackColor = false;
+            this.VendorToSoftwareLinkButton.Click += new System.EventHandler(this.VendorToSoftwareLinkButton_Click);
+            // 
+            // companyRefTextBox
+            // 
+            resources.ApplyResources(this.companyRefTextBox, "companyRefTextBox");
+            this.companyRefTextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.companyRefTextBox.ForeColor = System.Drawing.Color.Black;
+            this.companyRefTextBox.HideSelection = false;
+            this.companyRefTextBox.Name = "companyRefTextBox";
+            // 
+            // softwareIdTextBox
+            // 
+            resources.ApplyResources(this.softwareIdTextBox, "softwareIdTextBox");
+            this.softwareIdTextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.softwareIdTextBox.ForeColor = System.Drawing.Color.Black;
+            this.softwareIdTextBox.HideSelection = false;
+            this.softwareIdTextBox.Name = "softwareIdTextBox";
+            // 
+            // InitiateVenSofLinkButton
+            // 
+            this.InitiateVenSofLinkButton.BackColor = System.Drawing.Color.DarkGreen;
+            resources.ApplyResources(this.InitiateVenSofLinkButton, "InitiateVenSofLinkButton");
+            this.InitiateVenSofLinkButton.ForeColor = System.Drawing.Color.White;
+            this.InitiateVenSofLinkButton.Name = "InitiateVenSofLinkButton";
+            this.InitiateVenSofLinkButton.UseVisualStyleBackColor = false;
+            this.InitiateVenSofLinkButton.Click += new System.EventHandler(this.InitiateVenSofLinkButton_Click);
+            // 
+            // softwareLinkLabel
+            // 
+            resources.ApplyResources(this.softwareLinkLabel, "softwareLinkLabel");
+            this.softwareLinkLabel.Name = "softwareLinkLabel";
+            // 
+            // companyLinkLabel
+            // 
+            resources.ApplyResources(this.companyLinkLabel, "companyLinkLabel");
+            this.companyLinkLabel.Name = "companyLinkLabel";
+            // 
             // application
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.header);
             this.Controls.Add(this.footer);
-            this.Controls.Add(this.homePage);
             this.Controls.Add(this.vendorPage);
             this.Controls.Add(this.softwarePage);
             this.Controls.Add(this.signUpPage);
@@ -1456,6 +1521,7 @@ namespace FinancialServiceApplication
             this.Controls.Add(this.extraPanel);
             this.Controls.Add(this.aboutUs);
             this.Controls.Add(this.adminDataGridViewPanel);
+            this.Controls.Add(this.homePage);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.Name = "application";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -1511,6 +1577,8 @@ namespace FinancialServiceApplication
             this.addSoftwarePanel.PerformLayout();
             this.extraPanel.ResumeLayout(false);
             this.extraPanel.PerformLayout();
+            this.vendorToSoftwareLinkPanel.ResumeLayout(false);
+            this.vendorToSoftwareLinkPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1681,6 +1749,13 @@ namespace FinancialServiceApplication
         private TextBox adminAccessTextBox;
         private Button adminAccessButton;
         private Label adminCodeLabel;
+        private Button VendorToSoftwareLinkButton;
+        private Panel vendorToSoftwareLinkPanel;
+        private TextBox softwareIdTextBox;
+        private TextBox companyRefTextBox;
+        private Label softwareLinkLabel;
+        private Label companyLinkLabel;
+        private Button InitiateVenSofLinkButton;
     }
 }
 

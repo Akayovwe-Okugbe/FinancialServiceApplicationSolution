@@ -16,6 +16,8 @@ namespace FinancialServiceApplication
 
         public static string UPDATE_USER_ROLE = "UPDATE [USER] SET role = @role WHERE User_id = @user_id";
 
+        public static string LINK_QUERY = "INSERT INTO CompanySoftware (ref_no, software_id) VALUES (@ref_no, @software_id)";
+
         public static string ADD_NEW_VENDOR = "INSERT INTO COMPANY([company_name], [company_website], [company_established], [no_of_employees] ) VALUES(@company_name, @company_website, @company_established, @no_of_employees)";
 
         public static string ADD_NEW_SOFTWARE = " INSERT INTO SOFTWARE ([software_name], [description], [document_to_attach]) VALUES (@software_name, @description, @document_to_attach)";
@@ -25,7 +27,10 @@ namespace FinancialServiceApplication
 
         public string displayVendor()
         {
-            string DISPLAY_VENDORS = "SELECT * FROM COMPANY";
+            string DISPLAY_VENDORS = "SELECT COMPANY.ref_no, COMPANY.company_name, COMPANY.company_website, COMPANY.company_established, COMPANY.no_of_employees, SOFTWARE.software_id, SOFTWARE.software_name, SOFTWARE.description " +
+                "FROM COMPANY " +
+                "LEFT JOIN CompanySoftware ON COMPANY.ref_no = CompanySoftware.ref_no " +
+                "LEFT JOIN SOFTWARE ON CompanySoftware.software_id = SOFTWARE.software_id ";
             return DISPLAY_VENDORS;
         }
         public string displaySoftware()
