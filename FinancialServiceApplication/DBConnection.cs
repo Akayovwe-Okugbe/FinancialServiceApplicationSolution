@@ -76,6 +76,7 @@ namespace FinancialServiceApplication
 
                     //open connection
                     connectToDB.Open();
+
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, connectToDB);
 
                     //set the sqlCommand's properties
@@ -102,6 +103,24 @@ namespace FinancialServiceApplication
                 // You can also throw the exception or handle it in a way that suits your application
             }
         }
+
+        public bool IsEmailExists(string SqlQuery, string email)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand sqlCommand = new SqlCommand(SqlQuery, connection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@email", email);
+                    int count = (int)sqlCommand.ExecuteScalar();
+
+                    // If count is greater than 0, the email already exist
+                    return count > 0;
+                }
+            }
+        }
+
 
 
         // This code retrieves the hashed password specified to the inputed email fron the database

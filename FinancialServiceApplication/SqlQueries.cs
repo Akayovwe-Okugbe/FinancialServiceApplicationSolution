@@ -12,6 +12,8 @@ namespace FinancialServiceApplication
         public static string SAVE_USER_TO_DATABASE = "INSERT INTO [USER] (firstName, lastName, email, password, gender, mobile, address, postcode, country, role)" +
             " VALUES (@firstName, @lastName, @email, @password, @gender, @mobile, @address, @postcode, @country, @role)";
 
+        public static string VALIDATE_EMAIL = "SELECT COUNT(*) FROM [USER] WHERE email = @email";
+
         public static string VALIDATE_LOGIN_DETAILS = "SELECT firstname, password, role FROM [USER] WHERE email = @email";
 
         public static string UPDATE_USER_ROLE = "UPDATE [USER] SET role = @role WHERE User_id = @user_id";

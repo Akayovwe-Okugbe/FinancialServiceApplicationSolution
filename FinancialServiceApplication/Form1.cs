@@ -140,7 +140,7 @@ namespace FinancialServiceApplication
         }
 
         private void DisplayHomepage()
-        {
+        {           
             menuFunctions.Visible = true;
             PanelVisibility(header, footer, homePage);
         }
@@ -297,6 +297,15 @@ namespace FinancialServiceApplication
 
         private void LogInPageGoBackButton_Click(object sender, EventArgs e)
         {
+            // Clear the text boxes
+            foreach (Control control in logInForm.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Text = string.Empty;
+                }
+            }
+
             DisplayHomepage();
         }
 
@@ -312,13 +321,12 @@ namespace FinancialServiceApplication
             string password = logInPasswordBox.Text;
 
             // Validate the user, retrieve the firstname and role
-            bool userValidated = DBConnection.getInstanceOfDBConnection().ValidateUser(email, password, out string firstname, out string role);
-
-            DisplayGreeting(firstname, role);
+            bool userValidated = DBConnection.getInstanceOfDBConnection().ValidateUser(email, password, out string firstname, out string role);           
 
             if (userValidated)
             {
                 MessageBox.Show("LOGIN SUCCESSFUL!", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DisplayGreeting(firstname, role);
 
                 if (role == "CONSULTANT")
                 {
@@ -335,6 +343,7 @@ namespace FinancialServiceApplication
                     signupMenuItem.Visible = false;
                     adminAccessButton.Visible = false;
                     adminAccessPanel.Visible = false;
+                    VendorToSoftwareLinkButton.Visible = true;
                 }
                 else if (role == "ADMINISTRATOR")
                 {
@@ -367,6 +376,7 @@ namespace FinancialServiceApplication
                     btnAddSoft.Visible = false;
                     adminAccessButton.Visible = false;
                     adminAccessPanel.Visible = false;
+                    VendorToSoftwareLinkButton.Visible = false;
                 }
                 
                 
@@ -557,6 +567,14 @@ namespace FinancialServiceApplication
 
         private void SignUpPageGoBackButton_Click(object sender, EventArgs e)
         {
+            // Clear the text boxes
+            foreach (Control control in signUpForm.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Text = string.Empty;
+                }
+            }
             DisplayHomepage();
         }
 
@@ -601,32 +619,41 @@ namespace FinancialServiceApplication
             parameterList.Add(new SqlParameter("country", country));
             parameterList.Add(new SqlParameter("role", role));
 
-            //Save to the Database
-            DBConnection.getInstanceOfDBConnection().saveToDatabase(SqlQueries.SAVE_USER_TO_DATABASE, parameterList);
-
-            // Display the Administrator page
-            if (joinCommunityLabel.Text == "ADD A NEW USER")
+            // Check if email already exist in the database
+            if (DBConnection.getInstanceOfDBConnection().IsEmailExists(SqlQueries.VALIDATE_EMAIL, email))
             {
-                DisplayAdminPage();
+                MessageBox.Show("EMAIL ALREADY EXISTS! PLEASE ENTER ANOTHER EMAIL.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
             else
             {
-                // After successful signup, display a complete home screen
-                DisplayHomepage();
-                vendorButton.Visible = true;
-                softwareButton.Visible = true;
-                searchText.Visible = true;
-                searchButton.Visible = true;
-                menuFunctions.Visible = true;
-                logoutMenuItem.Visible = true;
-                loginMenuItem.Visible = false;
-                signupMenuItem.Visible = false;
-                BtnShowVendorPage.Visible = false;
-                btnAddSoft.Visible = false;
+                //Save to the Database
+                DBConnection.getInstanceOfDBConnection().saveToDatabase(SqlQueries.SAVE_USER_TO_DATABASE, parameterList);
 
-                DisplayGreeting(firstname, role);
+                // Display the Administrator page
+                if (joinCommunityLabel.Text == "ADD A NEW USER")
+                {
+                    DisplayAdminPage();
+                }
+                else
+                {
+                    // After successful signup, display a complete home screen
+                    DisplayHomepage();
+                    vendorButton.Visible = true;
+                    softwareButton.Visible = true;
+                    searchText.Visible = true;
+                    searchButton.Visible = true;
+                    menuFunctions.Visible = true;
+                    logoutMenuItem.Visible = true;
+                    loginMenuItem.Visible = false;
+                    signupMenuItem.Visible = false;
+                    BtnShowVendorPage.Visible = false;
+                    btnAddSoft.Visible = false;
+                    VendorToSoftwareLinkButton.Visible = false;
+
+                    DisplayGreeting(firstname, role);
+                }
             }
-            
 
         }
 
