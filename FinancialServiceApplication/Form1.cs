@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FinancialServiceApplication
 {
@@ -21,7 +23,7 @@ namespace FinancialServiceApplication
 
         //
         private readonly ArrayList parameterList = new ArrayList();
-
+        private ErrorProvider errorProvider = new ErrorProvider();
         //
         DBConnection dbconnection = DBConnection.getInstanceOfDBConnection();
         SqlQueries sqlQueries = new SqlQueries();
@@ -669,103 +671,169 @@ namespace FinancialServiceApplication
 
         private void BtnShowVendorPage_Click(object sender, EventArgs e)
         {
-            vendorDisplay.Visible = false;
-            addVendorPanel.Visible = true;
-            updateVendorPanel.Visible = false;        
-
+            // Set the visibility of the panels
+            vendorDisplay.Visible = false;        // Hide vendorDisplay panel
+            addVendorPanel.Visible = true;        // Show addVendorPanel
+            updateVendorPanel.Visible = false;    // Hide updateVendorPanel
         }
 
         private void btnAddVendor_Click(object sender, EventArgs e)
         {
+            // Validate each TextBox
+            List<string> emptyFields = new List<string>();
 
-            string company_name = companyNameTextBox.Text;
-            string company_website = websiteTextBox.Text;
-            string company_established = establishedDateTextBox.Text;
-            string no_of_employees = numEployeesTextBox.Text;
-            //string ref_no = updateRefNoTextBox.Text;
-
-            if (!string.IsNullOrEmpty(companyNameTextBox.Text) && !string.IsNullOrEmpty(websiteTextBox.Text) &&
-                !string.IsNullOrEmpty(establishedDateTextBox.Text) && !string.IsNullOrEmpty(numEployeesTextBox.Text))
+            // checks if textboxes are empty
+            if (string.IsNullOrWhiteSpace(companyNameTextBox.Text))
             {
+                emptyFields.Add("Company Name");
+            }
+
+            if (string.IsNullOrWhiteSpace(websiteTextBox.Text))
+            {
+                emptyFields.Add("Company Website");
+            }
+
+            if (string.IsNullOrWhiteSpace(establishedDateTextBox.Text))
+            {
+                emptyFields.Add("Established Date");
+            }
+
+            if (string.IsNullOrWhiteSpace(numemptextbox.Text))
+            {
+                emptyFields.Add("Number of Employees");
+            }
+
+            if (emptyFields.Count > 0)
+            {
+                //displays error message with list of empty textboxes
+                string errorMessage = "Please enter a value in ";
+                errorMessage += string.Join(", ", emptyFields);
+                errorMessage += ".";
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                // Get values from TextBoxes
+                string company_name = companyNameTextBox.Text;
+                string company_website = websiteTextBox.Text;
+                string company_established = establishedDateTextBox.Text;
+                string no_of_employees = numemptextbox.Text;
+                //attempt for adding a vendor
                 DBConnection.getInstanceOfDBConnection().AddVendorToDatabase(SqlQueries.ADD_NEW_VENDOR, company_name, company_website, company_established, no_of_employees);
+                MessageBox.Show("VENDOR ADDED SUCCESSFULLY", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Clear TextBoxes after successful addition
                 companyNameTextBox.Text = "";
                 websiteTextBox.Text = "";
                 establishedDateTextBox.Text = "";
-                numEployeesTextBox.Text = "";
+                numemptextbox.Text = "";
+                //navigate to vendor display page
                 vendorDisplay.Visible = true;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("PLEASE ENTER ALL THE DETAILS!", "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("ERROR ADDING VENDOR", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            List<string> emptyFields = new List<string>();
+            //checks if the textboxes are empty or not
+            if (string.IsNullOrWhiteSpace(comTextBox.Text))
+            {
+                emptyFields.Add("Company Name");
+            }
+            if (string.IsNullOrWhiteSpace(webTextBox.Text))
+            {
+                emptyFields.Add("Website");
+            }
+            if (string.IsNullOrWhiteSpace(estTextBox.Text))
+            {
+                emptyFields.Add("Established Date");
+            }
+            if (string.IsNullOrWhiteSpace(empTextBox.Text))
+            {
+                emptyFields.Add("Number Of Employees");
+            }
+            if (emptyFields.Count > 0)
+            {
+                //displays error message with list of empty textboxes
+                string errorMessage = "Please enter a value in ";
+                errorMessage += string.Join(", ", emptyFields);
+                errorMessage += ".";
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                VENDOR.changeVendor(dbconnection, sqlQueries, Convert.ToInt16(updateRefNoTextBox.Text), comTextBox.Text, webTextBox.Text, estTextBox.Text, empTextBox.Text);
+
+                // Display success message
+                MessageBox.Show("VENDOR UPDATE SUCCESSFUL", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Show the vendor display panel
+                vendorDisplay.Visible = true;
+                comTextBox.Text = "";
+                webTextBox.Text = "";
+                estTextBox.Text = "";
+                empTextBox.Text = "";
+
+            }
+            catch (Exception ex)
+            {
+                //displays the error message
+                MessageBox.Show($"ERROR OCCURRED: {ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void updateBtn_Click(object sender, EventArgs e)
-        {
-            VENDOR.changeVendor(dbconnection, sqlQueries, Convert.ToInt16(updateRefNoTextBox.Text), comTextBox.Text, webTextBox.Text, estTextBox.Text, empTextBox.Text);
-            updateRefNoTextBox.Text = "";
-            comTextBox.Text = "";
-            webTextBox.Text = "";
-            estTextBox.Text = "";
-            empTextBox.Text = "";
-            // MessageBox.Show("UPDATE IS SUCCESSFUL");
-            vendorDisplay.Visible = true;
-        }
 
         private void btnDeleteVendor_Click(object sender, EventArgs e)
         {
+            //call method from vendor class to delete vendor
             VENDOR.eraseVendor(dbconnection, sqlQueries, Convert.ToInt16(updateRefNoTextBox.Text), comTextBox.Text, webTextBox.Text, estTextBox.Text, empTextBox.Text);
-            updateRefNoTextBox.Text = "";
-            comTextBox.Text = "";
-            webTextBox.Text = "";
-            estTextBox.Text = "";
-            empTextBox.Text = "";
+            MessageBox.Show("VENDOR DELETE SUCCESSFUL", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //clear textboxes
+            companyNameTextBox.Text = "";
+            websiteTextBox.Text = "";
+            establishedDateTextBox.Text = "";
+            numEployeesTextBox.Text = "";
+            //show vendor display panel
+            vendorDisplay.Visible = true;
         }
 
+
+        // Switches to the vendors page and displays the vendor information panel
         private void BtnShowVendors_Click(object sender, EventArgs e)
         {
-
             PanelVisibility(vendorPage, vendorDisplay);
-            
         }
 
         private void displayVendorInGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //makes the textbox readonly
             updateRefNoTextBox.ReadOnly = true;
+            //check if valid cell is clicked
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && displayVendorInGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
+                //selects entire row when a row is clicked
                 displayVendorInGridView.CurrentRow.Selected = true;
-                //SOFTWARE.changeSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDescTextBox.Text, filePath.Text);
-                updateRefNoTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["ref_no"].FormattedValue.ToString();
-                // Assuming "software_name" is in the first column (index 0)
-                comTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_name"].FormattedValue.ToString();
-
-                // Assuming "description" is in the fourth column (index 3)
-                webTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_website"].FormattedValue.ToString();
-
-                // Assuming "path" is in the fifth column (index 4)
-                estTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_established"].FormattedValue.ToString();
-                empTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["no_of_employees"].FormattedValue.ToString();
-
-                // Show the update page
-                updateVendorPanel.Visible = true;
-            }
-            else if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && displayVendorInGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
+                //retrieve details of clicked row and populate textboxes with associated info
                 updateRefNoTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["ref_no"].FormattedValue.ToString();
                 comTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_name"].FormattedValue.ToString();
                 webTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_website"].FormattedValue.ToString();
                 estTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["company_established"].FormattedValue.ToString();
                 empTextBox.Text = displayVendorInGridView.Rows[e.RowIndex].Cells["no_of_employees"].FormattedValue.ToString();
+                //displays the vendor update panel
                 updateVendorPanel.Visible = true;
             }
+
         }
 
+        // Displays the homepage
         private void BtnShowHomePage_Click(object sender, EventArgs e)
         {
             DisplayHomepage();
-        }     
-       
+        }
+
         private void btnGoBackToAddingVendor_Click(object sender, EventArgs e)
         {
 
@@ -773,13 +841,17 @@ namespace FinancialServiceApplication
             //vendorDisplay.Visible = true;
             //addVendorPanel.Visible = false;
             //updateVendorPanel.Visible = false;
-        }    
+        }
 
         private void vendorDisplay_Paint(object sender, PaintEventArgs e)
         {
-            DataSet getVendor = dbconnection.LoadVendors(sqlQueries.displayVendor());
+            // Use the DBConnection to load vendor data using the displayVendor SQL query
+            DataSet getVendor = dbconnection.LoadUsers(sqlQueries.displayVendor());
+
+            // Set the DataSource of the displayVendorInGridView DataGridView to the loaded data
             displayVendorInGridView.DataSource = getVendor.Tables[0];
         }
+
 
         //
         //
@@ -793,8 +865,11 @@ namespace FinancialServiceApplication
 
         private void btnDeleteSoftwareFromDatabase_Click(object sender, EventArgs e)
         {
+
+            //delete software from database
             SOFTWARE.eraseSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDescTextBox.Text, filePath.Text);
-            // Clear the text boxes
+            MessageBox.Show("SOFTWARE DELETE SUCCESSFUL", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Clear the text boxes after successful delete
             softIDTextBox.Text = "";
             updateSoftNameTextBox.Text = "";
             updateSoftDescTextBox.Text = "";
@@ -804,99 +879,80 @@ namespace FinancialServiceApplication
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            // makes the softIDTextBox readonly
             softIDTextBox.ReadOnly = true;
+            //check if valid cell is clicked
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
+                //makes the entire row selected if row is clicked
                 dataGridView2.CurrentRow.Selected = true;
-                //SOFTWARE.changeSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDescTextBox.Text, filePath.Text);
-                softIDTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["software_id"].FormattedValue.ToString();
-                // Assuming "software_name" is in the first column (index 0)
-                updateSoftNameTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["software_name"].FormattedValue.ToString();
-
-                // Assuming "description" is in the fourth column (index 3)
-                updateSoftDescTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["description"].FormattedValue.ToString();
-
-                // Assuming "path" is in the fifth column (index 4)
-                filePath.Text = dataGridView2.Rows[e.RowIndex].Cells["document_to_attach"].FormattedValue.ToString();
-
-                // Show the update page
-                softwareUpdatePanel.Visible = true;
-            }
-            else if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
+                //retrieve details of clicked row and populate textboxes with associated info
                 softIDTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["software_id"].FormattedValue.ToString();
                 updateSoftNameTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["software_name"].FormattedValue.ToString();
                 updateSoftDescTextBox.Text = dataGridView2.Rows[e.RowIndex].Cells["description"].FormattedValue.ToString();
                 filePath.Text = dataGridView2.Rows[e.RowIndex].Cells["document_to_attach"].FormattedValue.ToString();
+                //show the software update page
                 softwareUpdatePanel.Visible = true;
+                filePath.Enabled = true;
+                //filePath.ReadOnly = false;
+
             }
         }
 
-        private void BtnGoToDeleteSoftware_Click(object sender, EventArgs e)
-        {
-            softwareUpdatePanel.Visible = false;
-            displaySoftwarePanel.Visible = false;
-            addSoftwarePanel.Visible = false;
 
-        }
 
-        private void btnBackToDisplaySoftwareFromDeletePage_Click_1(object sender, EventArgs e)
-        {
-            softwareUpdatePanel.Visible = false;
-            displaySoftwarePanel.Visible = true;
-            addSoftwarePanel.Visible = false;
-
-        }
 
         private void btnBacToAddingSoftware_Click(object sender, EventArgs e)
         {
-
+            //shows the software display page 
             displaySoftwarePanel.Visible = true;
+            //hide the stated panels
             addSoftwarePanel.Visible = false;
             softwareUpdatePanel.Visible = false;
         }
 
-        private void updateSoft_Click(object sender, EventArgs e)
-        {
-
-            softwareUpdatePanel.Visible = true;
-            displaySoftwarePanel.Visible = false;
-            addSoftwarePanel.Visible = false;
-        }
-
+        // Method to handle the Paint event of the displaySoftwarePanel
         private void displaySoftwarePanel_Paint(object sender, PaintEventArgs e)
         {
-            DataSet getSoftware = dbconnection.LoadSoftware(sqlQueries.displaySoftware());
-            dataGridView2.DataSource = getSoftware.Tables[0];
+            // Retrieve software data from the database using the displaySoftware SQL query
+            DataSet getSoftware = dbconnection.LoadUsers(sqlQueries.displaySoftware());
 
+            // Bind the retrieved software data to a DataGridView (dataGridView2) for display
+            dataGridView2.DataSource = getSoftware.Tables[0];
         }
+
 
         private void btnBrowseFile_Click_1(object sender, EventArgs e)
         {
+            //calling the pdfattach method from SOFTWARE class
             pathFile.Text = SOFTWARE.pdfAttach();
         }
 
         private void updateBrowse_Click(object sender, EventArgs e)
         {
+            //calling the pdfattach method from SOFTWARE class
             filePath.Text = SOFTWARE.pdfAttach();
         }
 
         private void btnGoBackToDisplaySoftwarePanel_Click(object sender, EventArgs e)
         {
-
+            //show software display page
             displaySoftwarePanel.Visible = true;
+            //hide the stated panels
             addSoftwarePanel.Visible = false;
             softwareUpdatePanel.Visible = false;
         }
 
         private void btnAddSoft_Click(object sender, EventArgs e)
         {
-
+            //hide the stated panels
             softwareUpdatePanel.Visible = false;
             displaySoftwarePanel.Visible = false;
+            //show the add software page
             addSoftwarePanel.Visible = true;
         }
 
+        //navigate to Homepage
         private void BtnGoBackToHomePage_Click(object sender, EventArgs e)
         {
             DisplayHomepage();
@@ -904,52 +960,110 @@ namespace FinancialServiceApplication
 
         private void btnAddSoftwareToDatabase_Click(object sender, EventArgs e)
         {
-            try
-            {
-                byte[] pdf = File.ReadAllBytes(pathFile.Text);
-                string software_name = softwareNameTextBox.Text;
-                string description = softwareDescriptionTextBox.Text;
-                string document_to_attach = pathFile.Text;
-                //int ref_no;
+            //validate each textbox
+            List<string> emptyFields = new List<string>();
 
-                if (!string.IsNullOrEmpty(softwareNameTextBox.Text) &&
-                !string.IsNullOrEmpty(softwareDescriptionTextBox.Text) &&
-                !string.IsNullOrEmpty(pathFile.Text))
+            // checks if textboxes are empty
+            if (string.IsNullOrWhiteSpace(softwareNameTextBox.Text))
+            {
+                emptyFields.Add("Software Name");
+            }
+
+            if (string.IsNullOrWhiteSpace(desctextbox.Text))
+            {
+                emptyFields.Add("Software Description");
+            }
+
+            if (string.IsNullOrWhiteSpace(pathFile.Text))
+            {
+                emptyFields.Add("File Path");
+            }
+
+            if (emptyFields.Count == 0)
+            {
+                try
                 {
-                    DBConnection.getInstanceOfDBConnection().AddSoftwareToDatabase(SqlQueries.ADD_NEW_SOFTWARE, software_name, description, document_to_attach);
+                    // Read the PDF file into a byte array
+                    byte[] pdf = File.ReadAllBytes(pathFile.Text);
+
+                    // Get values from TextBoxes
+                    string softwareName = softwareNameTextBox.Text;
+                    string description = softwareDescriptionTextBox.Text;
+                    string documentToAttach = pathFile.Text;
+
+                    // If all TextBoxes are valid, add software to the database
+                    DBConnection.getInstanceOfDBConnection().AddSoftwareToDatabase(SqlQueries.ADD_NEW_SOFTWARE, softwareName, description, documentToAttach);
+                    MessageBox.Show("SOFTWARE ADDED SUCCESSFULLY", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Clear TextBoxes after successful addition
                     softwareNameTextBox.Text = "";
                     softwareDescriptionTextBox.Text = "";
                     pathFile.Text = "";
+
+                    // Display the software panel
                     displaySoftwarePanel.Visible = true;
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("PLEASE ENTER ALL THE DETAILS!", "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //displays the error message
+                    MessageBox.Show($"PLEASE ATTACH PDF FILE");
                 }
+
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //displays error message
+                string errorMessage = "Please enter a value in ";
+                errorMessage += string.Join(", ", emptyFields);
+                errorMessage += ".";
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void updateSoftware_Click(object sender, EventArgs e)
         {
+            // Validate each TextBox
+            List<string> emptyFields = new List<string>();
+
+            //check is software name is empty or not
+            if (string.IsNullOrWhiteSpace(updateSoftNameTextBox.Text))
+            {
+                emptyFields.Add("Software Name");
+            }
+            //check if software description is empty or not
+            if (string.IsNullOrWhiteSpace(updateSoftDesc.Text))
+            {
+                emptyFields.Add(" Description");
+            }
+            //show error message if field is empty
+            if (emptyFields.Count > 0)
+            {
+                string errorMessage = "Please enter a value in ";
+                errorMessage += string.Join(", ", emptyFields);
+                errorMessage += ".";
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            //prevenT clearing the software id
             softIDTextBox.ReadOnly = true;
             try
             {
-                SOFTWARE.changeSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDescTextBox.Text, filePath.Text);
-                //softIDTextBox.Text = "";
+                //change software info in database
+                SOFTWARE.changeSoftware(dbconnection, sqlQueries, Convert.ToInt32(softIDTextBox.Text), updateSoftNameTextBox.Text, updateSoftDesc.Text, filePath.Text);
+
+                MessageBox.Show("SOFTWARE UPDATE SUCCESSFUL", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Clear TextBoxes and show the software panel after successful update
+                softIDTextBox.Text = "";
                 updateSoftNameTextBox.Text = "";
-                updateSoftDescTextBox.Text = "";
+                updateSoftDesc.Text = "";
                 filePath.Text = "";
-                //MessageBox.Show("UPDATE IS SUCCESSFUL");
                 displaySoftwarePanel.Visible = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"ERROR OCCURRED: {ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"PLEASE ATTACH PDF FILE");
             }
+            displaySoftwarePanel.Visible = true;
         }
 
         //
@@ -1034,17 +1148,184 @@ namespace FinancialServiceApplication
             DisplayAdminPage();
         }
 
+        // Method to toggle the visibility of the vendor/software link panel
         private void VendorToSoftwareLinkButton_Click(object sender, EventArgs e)
         {
+            // Toggle the visibility of the vendor/software link panel
             vendorToSoftwareLinkPanel.Visible = !vendorToSoftwareLinkPanel.Visible;
         }
 
+        // Method triggered when initiating the vendor-software linking process
         private void InitiateVenSofLinkButton_Click(object sender, EventArgs e)
         {
+            // Retrieve the vendor reference number and software ID from TextBoxes
             int ref_no = int.Parse(companyRefTextBox.Text);
             int software_id = int.Parse(softwareIdTextBox.Text);
 
+            // Call the method to link the vendor to the software in the database
             DBConnection.getInstanceOfDBConnection().LinkVendorToSoftware(SqlQueries.LINK_QUERY, ref_no, software_id);
+        }
+
+        private void comTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Set a maximum lentgth for the number of character allowed in the textbox
+            TextBoxLength(comTextBox, EventArgs.Empty, 50);
+        }
+
+        private void webTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Set a maximum lentgth for the number of character allowed in the textbox
+            TextBoxLength(webTextBox, EventArgs.Empty, 50);
+        }
+
+        private void empTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void estTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            // Cast the sender to TextBox
+            TextBox estTextBox = (TextBox)sender;
+
+            // Validate the entered text using the ValidDate method
+            if (!VENDOR.ValidDate(estTextBox.Text))
+            {
+                // Validation failed: prevent focus change and display an error message
+                e.Cancel = true;
+                errorProvider.SetError(estTextBox, "Please enter a valid date (YYYY-MM-DD)");
+            }
+            else
+            {
+                // Validation passed: allow focus change and clear the error message
+                e.Cancel = false;
+                errorProvider.SetError(estTextBox, null);
+            }
+        }
+
+        private void companyNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Set a maximum lentgth for the number of character allowed in the textbox
+            TextBoxLength(companyNameTextBox, EventArgs.Empty, 50);
+        }
+
+        private void websiteTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Set a maximum lentgth for the number of character allowed in the textbox
+            TextBoxLength(websiteTextBox, EventArgs.Empty, 50);
+        }
+
+        private void numEployeesTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //only allow integers and and '-'
+            TextBox numEployeesTextBox = (TextBox)sender;
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-' || numEployeesTextBox.Text.Contains('-') || numEployeesTextBox.SelectionStart == 0))
+            {
+                //hanle the event
+                e.Handled = true;
+
+            }
+        }
+
+        private void establishedDateTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox establishedDate = (TextBox)sender;
+            //validate entred text
+            if (!VENDOR.ValidDate(establishedDate.Text))
+            {
+                //cancel event
+                e.Cancel = true;
+                errorProvider.SetError(establishedDate, "Please enter a valid date (YYYY-MM-DD)");
+            }
+            else
+            {
+                //Allow focus change
+                e.Cancel = false;
+                //clear error message
+                errorProvider.SetError(establishedDate, null);
+            }
+        }
+
+        private void softIDTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void updateSoftNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Set a maximum lentgth for the number of character allowed in the textbox
+            TextBoxLength(updateSoftNameTextBox, EventArgs.Empty, 20);
+        }
+
+        private void updateSoftDescTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Limit the length of the text to 200 characters
+            TextBoxLength(updateSoftDescTextBox, EventArgs.Empty, 200);
+
+            // Allow only letters, commas, apostrophes, full stops, and backspace key
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) &&
+                e.KeyChar != ',' && e.KeyChar != '\'' && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back)
+            {
+                // Prevent the input of disallowed characters
+                e.Handled = true;
+            }
+        }
+
+        private void filePath_Click(object sender, EventArgs e)
+        {
+            // Get the file path from the 'label' control
+            string documentPath = filePath.Text;
+
+            // Check if the file path is not empty or null
+            if (!string.IsNullOrEmpty(documentPath))
+            {
+                try
+                {
+                    // Attempt to start a process to open the file
+                    Process.Start(documentPath);
+                }
+                catch (Exception ex)
+                {
+                    // Display an error message if there's an exception
+                    MessageBox.Show($"ERROR OPENING THE FILE: {ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void softwareNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Set a maximum lentgth for the number of character allowed in the textbox
+            TextBoxLength(softwareNameTextBox, EventArgs.Empty, 20);
+        }
+
+      
+
+        private void desctextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Limit the length of the text to 200 characters
+            TextBoxLength(softwareDescriptionTextBox, EventArgs.Empty, 200);
+
+            // Allow only letters, commas, apostrophes, full stops, and backspace key
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) &&
+                e.KeyChar != ',' && e.KeyChar != '\'' && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back)
+            {
+                // Prevent the input of disallowed characters
+                e.Handled = true;
+            }
+        }
+
+        private void updateSoftDesc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Limit the length of the text to 200 characters
+            TextBoxLength(updateSoftDescTextBox, EventArgs.Empty, 200);
+
+            // Allow only letters, commas, apostrophes, full stops, and backspace key
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) &&
+                e.KeyChar != ',' && e.KeyChar != '\'' && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back)
+            {
+                // Prevent the input of disallowed characters
+                e.Handled = true;
+            }
         }
 
 
