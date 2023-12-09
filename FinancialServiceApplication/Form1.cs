@@ -1327,7 +1327,25 @@ namespace FinancialServiceApplication
                 e.Handled = true;
             }
         }
+        public static void names()
+        {
+            // Array of 16 names
+            string[] names = {
+            "Alice", "Bob", "Charlie", "David",
+            "Eva", "Frank", "Grace", "Henry",
+            "Ivy", "Jack", "Katie", "Liam",
+            "Mia", "Noah", "Olivia", "Penny",
 
+        // Loop through the array and print each name
+        foreach (var name in names)
+            {
+                Console.WriteLine(name);
+            }
+        
+    }
+
+         
+        
 
         //
         //
