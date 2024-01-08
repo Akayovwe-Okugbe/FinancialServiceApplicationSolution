@@ -33,12 +33,15 @@ compare different solution opportunities for clients = Lost time
  A data repository that stores and links together both structured and unstructured data for a
 vendor and their products. This type of information will be both in a structured and an
 unstructured format (e.g., PDF documents, etc.)
+
  A user-friendly interface that allows authorized users to enter, maintain and view the vendor
 and their associated product(s) data. What a user can do in the system depends on their
 assigned access rights.
+
  User profile setup and maintenance with the ability to specify which type of functionality they
 can do in the system (e.g., set up a new system record, maintain a system record, view
 information, etc.).
+
  Searching capabilities based on multiple user-selected criteria. Display the search results and be
 able to drill down into a specific result to get more details about the vendor and/or application.
  Be able to store and select a link to a vendor’s website.
@@ -49,15 +52,19 @@ product(s) from within the system so that it can be viewed online.
  Create an on-line report that contains details of the selected system or systems. This report
 should be in PDF format and be able to be saved and/or printed. Optionally, create an Excel
 spreadsheet with the data.
+
  Identify when a new vendor entry is added to the system and when an existing vendor entry is
 updated. This can be done using a screen available in the system or by sending an email to users
 who indicate that they wish to receive one.
+
  Indicate when the information for a vendor should be reviewed based on the last review date
 entered. This can be done using a screen available in the system. The System Administrator
 should be able to specify the number of days from the current date after which the entry should
 be reviewed.
+
  If a specific vendor or product is selected, identify potentially similar applications (e.g., like the,
 “Frequently bought together”, functionality in Amazon.
+
  Allow users to leave comments for, and rate out of 5 stars, the vendor and/or specific
 application. Be able to show the comments.
 
